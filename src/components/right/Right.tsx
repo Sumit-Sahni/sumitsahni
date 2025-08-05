@@ -14,7 +14,7 @@ const experiences = [
     ],
   },
   {
-    title: "Full Stack Developer",
+    title: "MERN",
     company: "Engineer's Cradle",
     duration: "August 2024 to Nov 2024",
     details: [
@@ -41,26 +41,6 @@ const experiences = [
       "Developed a comprehensive Booking Dashboard using TypeScript, incorporating key features like customer name, email, source, status, and purchase ID tracking.",
       "Implemented pagination controls with previous and next buttons, enhancing navigation and improving the user experience for managing large datasets.",
       "Designed the UI with a focus on usability, making it easy for users to view and manage booking information efficiently.",
-    ],
-  },
-  {
-    title: "MERN Stack Developer",
-    company: "Engineer's Cradle",
-    duration: "August 2024 to Nov 2024",
-    details: [
-      "Collaborative Startup Experience: Worked closely with designers and developers in a fast-paced startup environment, enhancing cross-functional communication.",
-      "Developed with Next.js, TypeScript, and Tailwind CSS: Created a well-organized file structure with reusable components and optimized code for scalability.",
-      "Designed and implemented a fully responsive UI for a key company product, improving user experience across devices by leveraging modern frontend technologies and best practices.",
-    ],
-  },
-  {
-    title: "Frontend Developer [Intern]",
-    company: "Predrag System",
-    duration: "4 months",
-    details: [
-      "Designed and implemented a fully responsive UI for Evogym, enhancing user experience across all devices by utilizing modern frontend technologies.",
-      "Collaborated closely with the design team to transform wireframes and prototypes into a sleek, intuitive user interface, resulting in a 25% increase in user engagement.",
-      "Integrated dynamic features using React, ensuring seamless interaction for users and providing a solid foundation for future feature expansions.",
     ],
   },
 ];
