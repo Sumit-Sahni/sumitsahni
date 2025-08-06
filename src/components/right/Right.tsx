@@ -51,10 +51,9 @@ const Right = () => {
       <h2 className="text-3xl font-bold text-gray-900 mb-8 playfair-display">
         Experience
       </h2>
-
       <div className="relative">
         {/* Timeline vertical line - positioned to align with dots */}
-        <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+        <div className="absolute left-6 top-2 bottom-0 w-0.5 bg-gray-300"></div>
 
         <div className="space-y-8 pb-8">
           {experiences.map((exp, idx) => (

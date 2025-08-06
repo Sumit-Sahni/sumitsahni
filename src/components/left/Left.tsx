@@ -73,6 +73,10 @@ const Left = () => {
             text: "College Project",
             link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
           },
+          {
+            text: "Image",
+            link: "https://drive.google.com/file/d/10vECZAAIw90Gv8PU6gAKJEgHC3snTZww/view",
+          },
         ].map(({ text, link }, i) => (
           <div key={i} className="relative group">
             <a href={link} target="_blank" rel="noopener noreferrer">
@@ -101,6 +105,8 @@ const Left = () => {
       >
         Download Resume
       </a>
+
+      {/* Video play pause circle button */}
     </div>
   );
 };
