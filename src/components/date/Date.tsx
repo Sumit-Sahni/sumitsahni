@@ -31,7 +31,7 @@ const DateTimeBox = () => {
     <div className="text-xs bg-gray-100 text-gray-800 rounded-lg p-2 w-fit font-mono">
       {/* Make sure you're using formattedDate and formattedTime here */}
       <div>
-        <strong>Time:</strong> {formattedTime}
+        <strong>D/T:</strong> {formattedTime}
       </div>
     </div>
   );

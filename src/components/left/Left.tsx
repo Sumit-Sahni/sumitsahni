@@ -1,8 +1,10 @@
+import Image from "next/image";
 import React from "react";
+import award from "../../../assets/award.png";
 
 const Left = () => {
   return (
-    <div className="w-full flex flex-col items-center gap-6 pt-6 py-16">
+    <div className="w-full flex flex-col items-center gap-6 pt-6 py-12">
       {/* Profile Image */}
       <img
         src="https://media.licdn.com/dms/image/v2/D4D03AQFSYjGueQsjRQ/profile-displayphoto-shrink_800_800/B4DZO8XnLTGoAg-/0/1734032127496?e=1757548800&v=beta&t=3Ci5O1jrbZI6TSl5xnNG6-0WEd13qXpu4zKqUGxYkko"
@@ -57,6 +59,39 @@ const Left = () => {
         </a>
       </div>
 
+      <div className="flex flex-wrap justify-center gap-4 mt-6">
+        {[
+          {
+            text: "CCNA 200-301",
+            link: "https://www.udemy.com/certificate/UC-2c9eb698-7086-4d9f-9093-ec7435fb9680/",
+          },
+          {
+            text: "Web-dev boot-2021",
+            link: "https://www.udemy.com/certificate/UC-f73ada88-8d74-45bd-9ccf-a717372163d9/",
+          },
+          {
+            text: "College Project",
+            link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
+          },
+        ].map(({ text, link }, i) => (
+          <div key={i} className="relative group">
+            <a href={link} target="_blank" rel="noopener noreferrer">
+              <Image
+                src={award}
+                width={50}
+                height={50}
+                alt={`award-${i}`}
+                className="hover:drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)] hover:scale-110 transition duration-300 cursor-pointer rounded-full"
+              />
+            </a>
+
+            {/* Tooltip on hover */}
+            <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition pointer-events-none z-10">
+              {text}
+            </div>
+          </div>
+        ))}
+      </div>
       {/* Resume Download Button */}
       <a
         href="https://drive.google.com/file/d/1SiJQW1v53nggM0ROxjWk4D5IFuyX7PaE/view"

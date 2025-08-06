@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <div className=" text-[#6e6e73] text-xs px-4 py-2 w-full flex  justify-between items-center lg:fixed z-50">
         <div>
-          <h1 className="text-xs  md:text-lg">portfolio</h1>
+          <h1 className="text-lg  md:text-lg">portfolio</h1>
         </div>
         <DateTimeBox />
       </div>
