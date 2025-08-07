@@ -98,7 +98,7 @@ const Left = () => {
       </div>
       {/* Resume Download Button */}
       <a
-        href="https://drive.google.com/file/d/1SiJQW1v53nggM0ROxjWk4D5IFuyX7PaE/view"
+        href="https://drive.google.com/file/d/1gwFRXanzf7antMevmu8PsQXkczlFqMIT/view?usp=sharing"
         target="blank"
         download
         className="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition"
