@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import Videos from "@/components/video/Video"; // import your Videos component
 
 const experiences = [
   {
@@ -46,55 +48,81 @@ const experiences = [
 ];
 
 const Right = () => {
+  const [activeTab, setActiveTab] = useState<"experience" | "videos">(
+    "experience"
+  );
+
   return (
     <div className="w-full lg:w-[80%] mx-auto h-full overflow-y-auto px-2 lg:px-4">
-      <h2 className="text-3xl font-bold text-gray-900 mb-8 playfair-display">
-        Experience
-      </h2>
-      <div className="relative">
-        {/* Timeline vertical line - positioned to align with dots */}
-        <div className="absolute left-6 top-2 bottom-0 w-0.5 bg-gray-300"></div>
-
-        <div className="space-y-8 pb-8">
-          {experiences.map((exp, idx) => (
-            <div key={idx} className="relative flex items-start">
-              {/* Timeline dot - perfectly centered on the line */}
-              <div className="absolute left-4 top-1 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-md z-10"></div>
-
-              {/* Content container */}
-              <div className="ml-16 flex-1">
-                {/* Header section */}
-                <div className="mb-3">
-                  <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <h3 className="text-xl font-bold text-black">
-                      {exp.title}
-                    </h3>
-                    <span className="text-gray-500">•</span>
-                    <span className="text-lg text-blue-600 font-medium">
-                      {exp.company}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-500 font-medium">
-                    {exp.duration}
-                  </p>
-                </div>
-
-                {/* Details list */}
-                <ul className="space-y-2">
-                  {exp.details.map((detail, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                      <span className="text-gray-700 leading-relaxed inter">
-                        {detail}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
+      {/* Tabs */}
+      <div className="flex gap-4 mb-8 border-b border-gray-200 pb-2 py-4">
+        {[
+          { id: "experience", label: "Experience" },
+          { id: "videos", label: "Videos" },
+        ].map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id as "experience" | "videos")}
+            className={`relative px-5 py-2.5 text-base font-medium rounded-full transition-all duration-200 focus:outline-none cursor-pointer
+        ${
+          activeTab === tab.id
+            ? "text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 "
+            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+        }`}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
+
+      {/* Content */}
+      {activeTab === "experience" && (
+        <div className="relative">
+          {/* Timeline vertical line */}
+          <div className="absolute left-6 top-2 bottom-0 w-0.5 bg-gray-300"></div>
+            <div className="space-y-8 pb-8">
+            {experiences.map((exp, idx) => (
+              <div key={idx} className="relative flex items-start">
+                {/* Timeline dot */}
+                <div className="absolute left-4 top-1 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-md z-10"></div>
+
+                {/* Content */}
+                <div className="ml-16 flex-1">
+                  {/* Header */}
+                  <div className="mb-3">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <h3 className="text-xl font-bold text-black ">
+                        {exp.title}
+                      </h3>
+                      <span className="text-gray-500">•</span>
+                      <span className="text-lg text-blue-600 font-medium">
+                        {exp.company}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-500 font-medium">
+                      {exp.duration}
+                    </p>
+                  </div>
+
+                  {/* Details */}
+                  <ul className="space-y-2">
+                    {exp.details.map((detail, i) => (
+                      <li key={i} className="flex items-start">
+                        <span className="inline-block w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className="text-gray-700 leading-relaxed inter">
+                          {detail}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {activeTab === "videos" && <Videos />}
     </div>
   );
 };
