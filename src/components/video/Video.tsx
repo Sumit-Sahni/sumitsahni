@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import ospfThumb from "../../../assets/ospf1.webp"; // Your custom thumbnail for private video
+import ospfThumb from "../../../assets/ospf1.webp";
 
-// Video list — public videos won't need "image", private ones can have it
 const videoLinks = [
   {
     title: "Basics of OSPF start at 10:15",
-    link: "https://www.youtube.com/watch?v=klM03_uSRYs", // Private
-    image: ospfThumb, // Custom thumbnail from assets
+    link: "https://www.youtube.com/watch?v=klM03_uSRYs",
+    image: ospfThumb,
   },
 ];
 
@@ -21,9 +20,7 @@ const getYouTubeId = (url: string) => {
 const Videos = () => {
   return (
     <div className="space-y-2">
-      <h2 className="text-xl font-bold text-black ">
-        My Videos
-      </h2>
+      <h2 className="text-xl font-bold text-black ">My Videos</h2>
       <p className="text-gray-600 inter">
         I have recently started teaching as a hobby, and here are some topics
         that I have covered in the videos below.
@@ -52,7 +49,7 @@ const Videos = () => {
                 className="block"
               >
                 {imgSrc && (
-                  <div className="relative w-full aspect-video group">
+                  <div className="relative w-full max-w-[500px] aspect-video rounded-lg overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
                     <img
                       src={imgSrc}
                       alt={title}
@@ -62,8 +59,8 @@ const Videos = () => {
                       className="absolute inset-0 w-full h-full object-cover rounded-lg shadow-md group-hover:scale-105 group-hover:shadow-lg transition duration-300"
                     />
 
-                    {/* Play Icon in Top-Right */}
-                    <div className="absolute bottom-4 right-2 bg-black bg-opacity-60 rounded-full p-2 transition-transform duration-300 group-hover:scale-110">
+                    {/* Play Icon */}
+                    <div className="absolute bottom-3 right-3 bg-black bg-opacity-60 rounded-full p-2 transition-transform duration-300 group-hover:scale-110">
                       <svg
                         className="w-5 h-5 text-white cursor-pointer"
                         fill="currentColor"

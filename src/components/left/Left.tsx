@@ -2,12 +2,13 @@ import Image from "next/image";
 import React from "react";
 import award from "../../../assets/award.png";
 
+
 const Left = () => {
   return (
     <div className="w-full flex flex-col items-center gap-6 pt-6 py-12">
       {/* Profile Image */}
       <img
-        src="https://media.licdn.com/dms/image/v2/D4D03AQFSYjGueQsjRQ/profile-displayphoto-shrink_800_800/B4DZO8XnLTGoAg-/0/1734032127496?e=1757548800&v=beta&t=3Ci5O1jrbZI6TSl5xnNG6-0WEd13qXpu4zKqUGxYkko"
+        src="https://media.licdn.com/dms/image/v2/D4D03AQG1qgGIR_aRag/profile-displayphoto-crop_800_800/B4DZiyjyFwHwAI-/0/1755342382927?e=1758153600&v=beta&t=YAsIbT0hp_DFbABpYbrTzkibGRIxSzcHZJ3XhTEv_Is"
         alt="Profile"
         className="w-48 h-48 rounded-full object-fill border-2 border-gray-300 "
       />
