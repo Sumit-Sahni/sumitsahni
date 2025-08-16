@@ -3,13 +3,11 @@ import Footer from "@/components/footer/Footer";
 import Left from "@/components/left/Left";
 import Right from "@/components/right/Right";
 import ScrollProgressBar from "@/components/scrollbar/ScrollProgressBar";
-import back from "../../assets/background.jpg"; 
 
 export default function Home() {
   return (
     <div
       className="min-h-screen bg-fill sm:bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${back.src})` }} 
     >
       {/* Scroll Progress Bar */}
       <ScrollProgressBar />

@@ -102,7 +102,7 @@ const Left = () => {
         href="https://drive.google.com/file/d/1gwFRXanzf7antMevmu8PsQXkczlFqMIT/view?usp=sharing"
         target="blank"
         download
-        className="mt-4 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition"
+        className="mt-4 relative px-5 py-2.5 text-base font-medium rounded-full duration-200 focus:outline-none cursor-pointer text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition"
       >
         Download Resume
       </a>
