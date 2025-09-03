@@ -18,7 +18,7 @@ const Left = () => {
         <p className="text-sm text-gray-600 mb-6">
           Cybersecurity & Software Professional
         </p>
-        <div className="p-2">
+        <div className="px-6 sm:px-1">
           <p className=" font-extrabold mb-2">Open To Work ↓ </p>
           <p className="text-gray-700 font-bold">
             Aspiring SOC Analyst (Tier 1) | Cybersecurity Analyst (Entry-Level)
@@ -69,7 +69,6 @@ const Left = () => {
           </svg>
         </a>
       </div>
-
       <div className="flex flex-wrap justify-center gap-4 mt-6">
         {[
           {
@@ -89,20 +88,11 @@ const Left = () => {
             text: "College Project",
             link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
           },
-          {
-            text: "Image",
-            link: "https://drive.google.com/file/d/10vECZAAIw90Gv8PU6gAKJEgHC3snTZww/view",
-          },
         ].map(({ text, link }, i) => (
-          <div key={i} className="relative group">
+          <div key={i} className="relative group items-center justify-center px-4 sm:px-1">
             <a href={link} target="_blank" rel="noopener noreferrer">
               <h1 className=" text-blue-700">{text} .</h1>
             </a>
-
-            {/* Tooltip on hover */}
-            <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max bg-black text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition pointer-events-none z-10">
-              {text}
-            </div>
           </div>
         ))}
       </div>
@@ -111,7 +101,7 @@ const Left = () => {
         href="https://drive.google.com/file/d/1Hz7IbP_cP_mQCe5lgqZUuAKff5GQT6_q/view?usp=sharing"
         target="blank"
         download
-        className="mt-4 relative px-5 py-2.5 text-base font-medium rounded-full duration-200 focus:outline-none cursor-pointer text-white bg-gradient-to-r from-gray-500 to-gray-500 hover:from-cyan-600 hover:to-gray-600 transition"
+        className="mt-4 relative px-5 py-2.5 text-base font-medium rounded-full duration-200 focus:outline-none cursor-pointer text-white bg-gradient-to-r from-cyan-600 to-gray-600 hover:from-cyan-700 hover:to-gray-700 transition"
       >
         Download Resume
       </a>

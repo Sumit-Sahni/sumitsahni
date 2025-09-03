@@ -67,7 +67,7 @@ const Right = () => {
             className={`relative px-5 py-2.5 text-base font-medium rounded-full transition-all duration-200 focus:outline-none cursor-pointer
         ${
           activeTab === tab.id
-            ? "text-white bg-gradient-to-r from-gray-500 to-gray-500 hover:from-cyan-600 hover:to-gray-600 transition  "
+            ? "text-white bg-gradient-to-r from-cyan-600 to-gray-600 hover:from-cyan-700 hover:to-gray-700transition  "
             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
         }`}
           >
