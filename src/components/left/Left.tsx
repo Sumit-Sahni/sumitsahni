@@ -2,10 +2,9 @@ import Image from "next/image";
 import React from "react";
 import award from "../../../assets/award.png";
 
-
 const Left = () => {
   return (
-    <div className="w-full flex flex-col items-center gap-6 pt-6 py-12">
+    <div className="w-full flex flex-col items-center gap-6 pt-6 py-12  sticky top-0">
       {/* Profile Image */}
       <img
         src="https://media.licdn.com/dms/image/v2/D4D03AQG1qgGIR_aRag/profile-displayphoto-crop_800_800/B4DZiyjyFwHwAI-/0/1755342382927?e=1758153600&v=beta&t=YAsIbT0hp_DFbABpYbrTzkibGRIxSzcHZJ3XhTEv_Is"
@@ -15,8 +14,19 @@ const Left = () => {
 
       {/* Name & Title */}
       <div className="text-center">
-        <h2 className="text-xl font-bold">Sumit Sahni</h2>
-        <p className="text-sm text-gray-600">Software/Network Engineer</p>
+        <h2 className="text-xl font-bold mb-1">Sumit Sahni</h2>
+        <p className="text-sm text-gray-600 mb-6">
+          Cybersecurity & Software Professional
+        </p>
+        <div className="p-2">
+          <p className=" font-extrabold mb-2">Open To Work ↓ </p>
+          <p className="text-gray-700 font-bold">
+            Aspiring SOC Analyst (Tier 1) | Cybersecurity Analyst (Entry-Level)
+            | Junior Incident Response Analyst | Vulnerability Analyst
+            (Associate) | Information Security Analyst | Junior Security
+            Engineer.
+          </p>
+        </div>
       </div>
 
       {/* Social Media Handles */}
@@ -63,9 +73,14 @@ const Left = () => {
       <div className="flex flex-wrap justify-center gap-4 mt-6">
         {[
           {
+            text: "CompTia Security +",
+            link: "https://www.udemy.com/certificate/UC-7457ca37-4baa-437f-b078-a74931667ee7/",
+          },
+          {
             text: "CCNA 200-301",
             link: "https://www.udemy.com/certificate/UC-2c9eb698-7086-4d9f-9093-ec7435fb9680/",
           },
+
           {
             text: "Web-dev boot-2021",
             link: "https://www.udemy.com/certificate/UC-f73ada88-8d74-45bd-9ccf-a717372163d9/",
@@ -81,13 +96,7 @@ const Left = () => {
         ].map(({ text, link }, i) => (
           <div key={i} className="relative group">
             <a href={link} target="_blank" rel="noopener noreferrer">
-              <Image
-                src={award}
-                width={50}
-                height={50}
-                alt={`award-${i}`}
-                className="hover:drop-shadow-[0_4px_10px_rgba(0,0,0,0.3)] hover:scale-110 transition duration-300 cursor-pointer rounded-full"
-              />
+              <h1 className=" text-blue-700">{text} .</h1>
             </a>
 
             {/* Tooltip on hover */}
@@ -99,10 +108,10 @@ const Left = () => {
       </div>
       {/* Resume Download Button */}
       <a
-        href="https://drive.google.com/file/d/1gwFRXanzf7antMevmu8PsQXkczlFqMIT/view?usp=sharing"
+        href="https://drive.google.com/file/d/1Hz7IbP_cP_mQCe5lgqZUuAKff5GQT6_q/view?usp=sharing"
         target="blank"
         download
-        className="mt-4 relative px-5 py-2.5 text-base font-medium rounded-full duration-200 focus:outline-none cursor-pointer text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition"
+        className="mt-4 relative px-5 py-2.5 text-base font-medium rounded-full duration-200 focus:outline-none cursor-pointer text-white bg-gradient-to-r from-gray-500 to-gray-500 hover:from-cyan-600 hover:to-gray-600 transition"
       >
         Download Resume
       </a>

@@ -23,12 +23,12 @@ export default function Home() {
       {/* Main Content */}
       <div className="font-sans min-h-screen p-2 sm:p-8 md:p-12 lg:p-24 flex flex-col lg:flex-row">
         {/* Left Section - Fixed */}
-        <div className="lg:w-1/5 lg:fixed lg:h-screen lg:overflow-hidden flex flex-col items-start">
+        <div className="lg:w-1/3  flex flex-col items-start">
           <Left />
         </div>
 
         {/* Right Section - Scrollable */}
-        <div className="lg:w-full lg:ml-[20%] flex flex-col items-end">
+        <div className="lg:w-full  flex flex-col items-end">
           <Right />
         </div>
       </div>
