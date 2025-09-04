@@ -19,13 +19,7 @@ const Left = () => {
           Cybersecurity & Software Professional
         </p>
         <div className="px-6 sm:px-1">
-          <p className=" font-extrabold mb-2">Open To Work ↓ </p>
-          <p className="text-gray-700 font-bold">
-            Aspiring SOC Analyst (Tier 1) | Cybersecurity Analyst (Entry-Level)
-            | Junior Incident Response Analyst | Vulnerability Analyst
-            (Associate) | Information Security Analyst | Junior Security
-            Engineer.
-          </p>
+          <p className=" font-extrabold mb-2 text-green-600">Open To Work</p>
         </div>
       </div>
 

@@ -88,7 +88,7 @@ const Right = () => {
                 <div className="absolute left-4 top-1 w-4 h-4 bg-blue-600 rounded-full border-4 border-white shadow-md z-10"></div>
 
                 {/* Content */}
-                <div className="ml-16 flex-1">
+                <div className="ml-12 sm:ml-16 flex-1">
                   {/* Header */}
                   <div className="mb-3">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
