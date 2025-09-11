@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import ospfThumb from "../../../assets/ospf1.webp";
+import dns from "../../../assets/DNS.jpg";
 
 const videoLinks = [
+  {
+    title: "DNS_Working Principle",
+    link: "https://www.youtube.com/watch?v=LtDQTiBZE6w",
+    image: dns,
+  },
   {
     title: "Basics of OSPF start at 10:15",
     link: "https://www.youtube.com/watch?v=klM03_uSRYs",
     image: ospfThumb,
   },
+  
 ];
 
 // Extract YouTube video ID
@@ -49,7 +56,7 @@ const Videos = () => {
                 className="block"
               >
                 {imgSrc && (
-                  <div className="relative w-full max-w-[500px] aspect-video rounded-lg overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
+                  <div className="relative w-full max-w-[500px] md:max-w-[600px] xl:max-w-[800px] aspect-video rounded-lg overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-105">
                     <img
                       src={imgSrc}
                       alt={title}
