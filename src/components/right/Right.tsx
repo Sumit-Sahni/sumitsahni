@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Videos from "@/components/video/Video"; // import your Videos component
+import Projects from "@/components/projects/Projects"; // import your Projects component
 
 const experiences = [
   {
@@ -49,7 +50,7 @@ const experiences = [
 ];
 
 const Right = () => {
-  const [activeTab, setActiveTab] = useState<"experience" | "videos">(
+  const [activeTab, setActiveTab] = useState<"experience" | "videos" | "projects">(
     "experience"
   );
 
@@ -60,10 +61,13 @@ const Right = () => {
         {[
           { id: "experience", label: "Experience" },
           { id: "videos", label: "Videos" },
+          { id: "projects", label: "Projects" },
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as "experience" | "videos")}
+            onClick={() =>
+              setActiveTab(tab.id as "experience" | "videos" | "projects")
+            }
             className={`relative px-5 py-2.5 text-base font-medium rounded-full transition-all duration-200 focus:outline-none cursor-pointer
         ${
           activeTab === tab.id
@@ -81,7 +85,7 @@ const Right = () => {
         <div className="relative">
           {/* Timeline vertical line */}
           <div className="absolute left-6 top-2 bottom-0 w-0.5 bg-gray-300"></div>
-            <div className="space-y-8 pb-8">
+          <div className="space-y-8 pb-8">
             {experiences.map((exp, idx) => (
               <div key={idx} className="relative flex items-start">
                 {/* Timeline dot */}
@@ -124,6 +128,7 @@ const Right = () => {
       )}
 
       {activeTab === "videos" && <Videos />}
+      {activeTab === "projects" && <Projects />}
     </div>
   );
 };

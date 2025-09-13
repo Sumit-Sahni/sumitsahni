@@ -19,7 +19,7 @@ const Left = () => {
           Cybersecurity & Software Professional
         </p>
         <div className="px-6 sm:px-1">
-          <p className=" font-extrabold mb-2 text-green-600">Open To Work</p>
+          <p className=" font-medium mb-2 text-green-600">Open To Work</p>
         </div>
       </div>
 
@@ -92,7 +92,7 @@ const Left = () => {
       </div>
       {/* Resume Download Button */}
       <a
-        href="https://drive.google.com/file/d/1Hz7IbP_cP_mQCe5lgqZUuAKff5GQT6_q/view?usp=sharing"
+        href="https://drive.google.com/file/d/1Ni4juPbmGeDFoA1fjW_PSpS46HFF_vJ9/view?usp=sharing"
         target="blank"
         download
         className="mt-4 relative px-5 py-2.5 text-base font-medium rounded-full duration-200 focus:outline-none cursor-pointer text-white bg-gradient-to-r from-cyan-600 to-gray-600 hover:from-cyan-700 hover:to-gray-700 transition"
