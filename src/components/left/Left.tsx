@@ -1,13 +1,13 @@
 import Image from "next/image";
 import React from "react";
-import award from "../../../assets/award.png";
+import award from "../../../assets/me.png";
 
 const Left = () => {
   return (
     <div className="w-full flex flex-col items-center gap-6 pt-6 py-12  sticky top-0">
       {/* Profile Image */}
-      <img
-        src="https://media.licdn.com/dms/image/v2/D4D03AQG1qgGIR_aRag/profile-displayphoto-crop_800_800/B4DZiyjyFwHwAI-/0/1755342382927?e=1758153600&v=beta&t=YAsIbT0hp_DFbABpYbrTzkibGRIxSzcHZJ3XhTEv_Is"
+      <Image
+        src={award}
         alt="Profile"
         className="w-48 h-48 rounded-full object-fill border-2 border-gray-300 "
       />
