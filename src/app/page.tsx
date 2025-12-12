@@ -13,7 +13,7 @@ export default function Home() {
       <ScrollProgressBar />
 
       {/* Header */}
-      <div className="sm:text-gray-500 text-xs px-4 py-2 w-full flex justify-between items-center lg:fixed z-50">
+      <div className="sm:text-black text-xs px-4 py-2 w-full flex justify-between items-center lg:fixed z-50">
         <div>
           <h1 className="text-lg md:text-lg">portfolio</h1>
         </div>

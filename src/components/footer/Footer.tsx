@@ -13,7 +13,7 @@ const Footer = () => {
           <p>2021 - 2025 personal porfolio</p>
           <div className="flex justify-center gap-4 mt-2 flex-wrap">
             <Link href="#" className="hover:underline">
-              made with ❤️ by Sumit Sahni
+              Developed by Sumit Sahni -- Pune
             </Link>
           </div>
         </div>
