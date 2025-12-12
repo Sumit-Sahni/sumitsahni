@@ -24,12 +24,24 @@ const Right = () => {
             onClick={() =>
               setActiveTab(tab.id as "experience" | "videos" | "projects")
             }
-            className={`relative px-5 py-2.5 text-base font-medium rounded-full transition-all duration-200 focus:outline-none cursor-pointer
-        ${
-          activeTab === tab.id
-            ? "text-white bg-gradient-to-r from-cyan-600 to-gray-600 hover:from-cyan-700 hover:to-gray-700transition  "
-            : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-        }`}
+            className={`
+    relative px-5 py-2.5 text-base font-medium rounded-full 
+    transition-all duration-300 focus:outline-none cursor-pointer
+    ${
+      activeTab === tab.id
+        ? `
+        bg-neutral-900/80 text-white 
+        border border-neutral-700 
+        backdrop-blur-xl 
+        shadow-sm shadow-black/40 
+        hover:bg-neutral-800/90 hover:shadow-black/60
+        `
+        : `
+        bg-gray-100 text-gray-600 
+        hover:bg-gray-200
+        `
+    }
+  `}
           >
             {tab.label}
           </button>
