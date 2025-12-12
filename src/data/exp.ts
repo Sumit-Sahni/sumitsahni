@@ -1,6 +1,6 @@
 export const experiences = [
   {
-    title: "loading ...",
+    title: "",
     company: "",
     duration: "",
     details: [
