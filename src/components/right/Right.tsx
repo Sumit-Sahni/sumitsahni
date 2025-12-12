@@ -13,40 +13,42 @@ const Right = () => {
   return (
     <div className="w-full lg:w-[80%] mx-auto h-auto overflow-y-auto px-2 lg:px-4">
       {/* Tabs */}
-      <div className="flex gap-4 mb-8 border-b border-gray-200 pb-2 py-4">
-        {[
-          { id: "experience", label: "Experience" },
-          { id: "videos", label: "Videos" },
-          { id: "projects", label: "Projects" },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() =>
-              setActiveTab(tab.id as "experience" | "videos" | "projects")
-            }
-            className={`
-    relative px-5 py-2.5 text-base font-medium rounded-full 
-    transition-all duration-300 focus:outline-none cursor-pointer
-    ${
-      activeTab === tab.id
-        ? `
-        bg-neutral-900/80 text-white 
-        border border-neutral-700 
-        backdrop-blur-xl 
-        shadow-sm shadow-black/40 
-        hover:bg-neutral-800/90 hover:shadow-black/60
-        `
-        : `
-        bg-gray-100 text-gray-600 
-        hover:bg-gray-200
-        `
-    }
-  `}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+     <div className="flex gap-4 mb-8 border-b border-gray-200 pb-2 py-4 overflow-x-auto scrollbar-hide">
+  {[
+    { id: "experience", label: "Experience" },
+    { id: "videos", label: "Videos" },
+    { id: "projects", label: "Projects" },
+  ].map((tab) => (
+    <button
+      key={tab.id}
+      onClick={() =>
+        setActiveTab(tab.id as "experience" | "videos" | "projects")
+      }
+      className={`
+        relative px-5 py-2.5 text-base font-medium rounded-full 
+        whitespace-nowrap flex-shrink-0
+        transition-all duration-300 focus:outline-none cursor-pointer
+        ${
+          activeTab === tab.id
+            ? `
+            bg-neutral-900/80 text-white 
+            border border-neutral-700 
+            backdrop-blur-xl 
+            shadow-sm shadow-black/40 
+            hover:bg-neutral-800/90 hover:shadow-black/60
+            `
+            : `
+            bg-gray-100 text-gray-600 
+            hover:bg-gray-200
+            `
+        }
+      `}
+    >
+      {tab.label}
+    </button>
+  ))}
+</div>
+
 
       {/* Content */}
       {activeTab === "experience" && (
