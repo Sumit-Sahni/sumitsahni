@@ -1,27 +1,44 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function ScrollProgressBar() {
-  const [scrollWidth, setScrollWidth] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const updateProgress = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = (scrollTop / docHeight) * 100;
-      setScrollWidth(scrolled);
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+
+      const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${progress})`;
+      }
+
+      ticking.current = false;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      if (!ticking.current) {
+        ticking.current = true;
+        requestAnimationFrame(updateProgress);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-[4px]  z-[9999] bg-transparent">
+    <div className="fixed top-0 left-0 w-full h-[2px] z-[9999] bg-transparent">
       <div
-        className="h-full bg-gradient-to-r from-gray-500 to-gray-500 hover:from-gray-600 hover:to-gray-600 transition-all duration-75 rounded-full"
-        style={{ width: `${scrollWidth}%` }}
+        ref={barRef}
+        className="h-full origin-left bg-gradient-to-r from-black to-black
+        rounded-full will-change-transform"
+        style={{ transform: "scaleX(0)" }}
       />
     </div>
   );

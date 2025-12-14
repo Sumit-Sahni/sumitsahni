@@ -19,8 +19,8 @@ export default function Home() {
 
       {/* Top hero background */}
       {/* <div 
-  className="w-full h-0 lg:h-[20vh] bg-cover bg-center bg-no-repeat pt-[calc(10vh+2.5rem)] z-50 hero-bg hidden md:block"
-  style={{ backgroundImage: "url('https://mir-s3-cdn-cf.behance.net/0a0eb8d7687ab8f449c681c33a6c7ea4/75ab6d67-4659-4c11-bcd7-887346a4114c_rwc_-3x2873x4961x620x4961.jpg?h=51592c62ad21c23ee064ae8f46446d0f')" }}
+  className="w-full h-[20vh] bg-cover bg-center bg-no-repeat pt-[calc(10vh+2.5rem)] z-50 hero-bg  "
+  style={{ backgroundImage: "url('https://www.commercialdesignindia.com/cloud/2024/09/16/Microsoft-And-Google-Race-To-Build-The-Worlds-Smartest-Cloud.jpg')" }}
 />  */}
 
 
@@ -28,7 +28,7 @@ export default function Home() {
       <ScrollProgressBar />
 
       {/* Main Content */}
-      <div className="font-sans min-h-screen pt-[10vh] p-2 sm:p-8 md:p-12 lg:p-20 flex flex-col lg:flex-row">
+      <div className="font-sans min-h-screen pt-[10vh] p-2 sm:p-8 md:p-12 lg:p-20 flex flex-col lg:flex-row bg-white">
         <div className="lg:w-1/3 flex flex-col items-start">
           <Left />
         </div>
