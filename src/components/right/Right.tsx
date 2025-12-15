@@ -7,7 +7,7 @@ import Projects from "@/components/projects/Projects";
 import { experiences } from "@/data/exp";
 
 /* ---------------------------------- */
-/* Motion Variants (TS Safe & Premium) */
+/* Motion Variants */
 /* ---------------------------------- */
 
 const containerVariants: Variants = {
@@ -66,14 +66,28 @@ const Right = () => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="lg:w-[100%] h-auto overflow-y-auto md:px-4 
-      bg-white rounded-3xl border-gray-200 
-      p-6 md:p-8 lg:p-8"
+      className="
+        w-full
+        max-w-full
+        h-auto
+        overflow-x-hidden
+        overflow-y-auto
+        rounded-3xl
+        px-1 sm:px-6
+        py-8 sm:py-8
+      "
     >
       {/* ---------------- Tabs ---------------- */}
       <motion.div
         variants={itemVariants}
-        className="flex gap-4 mb-10 pb-2 pt-6 overflow-x-auto scrollbar-hide"
+        className="
+          flex
+          gap-3
+          mb-6 sm:mb-10
+          pt-2
+          overflow-x-auto
+          scrollbar-hide
+        "
       >
         {[
           { id: "experience", label: "Experience" },
@@ -88,19 +102,19 @@ const Right = () => {
               setActiveTab(tab.id as "experience" | "videos" | "projects")
             }
             className={`
-              relative px-5 py-2.5 text-base font-medium rounded-full 
-              whitespace-nowrap transition-all duration-300 cursor-pointer
+              relative
+              px-4 py-2
+              text-sm sm:text-base
+              font-medium
+              rounded-full
+              whitespace-nowrap
+              transition-all
+              duration-300
+              cursor-pointer
               ${
                 activeTab === tab.id
-                  ? `
-                  bg-neutral-900/80 text-white 
-                  border border-neutral-700 
-                  shadow-sm shadow-black/40
-                  `
-                  : `
-                  bg-gray-100 text-gray-600 
-                  hover:bg-gray-200
-                  `
+                  ? "bg-neutral-900/80 text-white shadow-sm shadow-black/40"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }
             `}
           >
@@ -121,45 +135,54 @@ const Right = () => {
             className="relative"
           >
             {/* Timeline Line */}
-            <div className="absolute left-6 top-2 bottom-0 w-0.5 bg-gray-300" />
+            <div className="absolute left-3 sm:left-6 top-2 bottom-0 w-0.5 bg-gray-300" />
 
-            <div className="space-y-10 pb-8">
+            <div className="space-y-8 sm:space-y-10 pb-6">
               {experiences.map((exp, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
                   whileHover={{ y: -4 }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 120,
-                    damping: 18,
-                  }}
-                  className="relative flex items-start"
+                  transition={{ type: "spring", stiffness: 120, damping: 18 }}
+                  className="
+                    relative
+                    flex
+                    flex-col sm:flex-row
+                    items-start
+                  "
                 >
                   {/* Timeline Dot */}
                   <motion.div
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: idx * 0.05 }}
-                    className={`absolute left-4 top-1 w-4 h-4 rounded-full 
-                    border-4 border-white shadow-md z-10
-                    ${
-                      exp.active ? "bg-green-500" : "bg-blue-600"
-                    }`}
+                    className={`
+                      absolute
+                      left-2 sm:left-4
+                      top-1
+                      w-3 h-3 sm:w-4 sm:h-4
+                      rounded-full
+                      border-4 border-white
+                      shadow-md
+                      z-10
+                      ${
+                        exp.active ? "bg-green-500 animate-spin" : "bg-blue-600"
+                      }
+                    `}
                   />
 
                   {/* Content */}
-                  <div className="ml-12 sm:ml-16 flex-1">
+                  <div className="ml-8 sm:ml-16 flex-1">
                     <div className="mb-3">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-lg font-bold text-black">
+                        <h3 className="text-base sm:text-lg font-bold text-black">
                           {exp.title}
                         </h3>
-                        <span className="text-md text-blue-600 font-medium">
+                        <span className="text-sm sm:text-md text-blue-600 font-medium">
                           {exp.company}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-500 font-medium">
+                      <p className="text-xs sm:text-sm text-gray-500 font-medium">
                         {exp.duration}
                       </p>
                     </div>
@@ -168,16 +191,13 @@ const Right = () => {
                       {exp.details.map((detail, i) => (
                         <motion.li
                           key={i}
-                          initial={{ opacity: 0, x: -8 }}
+                          initial={{ opacity: 0, x: -6 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: i * 0.05,
-                            duration: 0.3,
-                          }}
+                          transition={{ delay: i * 0.05 }}
                           className="flex items-start"
                         >
-                          <span className="inline-block w-1 h-1 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0" />
-                          <span className="text-gray-700 leading-relaxed">
+                          <span className="mt-2 mr-3 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
+                          <span className="text-sm text-gray-700 leading-relaxed">
                             {detail}
                           </span>
                         </motion.li>
