@@ -62,7 +62,7 @@ const GoogleAuthButton = () => {
         // 👤 User Email + Sign Out
         <div className="">
           <span className="text-sm truncate max-w-[200px] px-2 text-blue-500">
-            {user.email}
+           <span className=" text-black mr-2 ">Hello!</span> {user.email}
           </span>
 
           <button

@@ -11,23 +11,23 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-fill sm:bg-cover bg-center bg-no-repeat">
       {/* Header */}
-      <div className="top-0 left-0 right-0 w-full px-4 py-4
+      <div
+        className="top-0 left-0 right-0 w-full px-4 py-4
                       flex justify-between items-center
-                      text-black text-xs">
-
+                      text-black text-xs"
+      >
         {/* Left */}
         <h1 className="text-xs p-1 px-2 rounded-sm md:text-md font-bold bg-white text-black">
           portfolio
         </h1>
 
         {/* Right */}
-        <div className="flex flex-col items-start gap-1">
-          <DateTimeBox />
-
+        <div className="flex flex-row justify-between items-center gap-1">
           {/* 🔒 Hidden on mobile */}
-          <div className="hidden md:block mt-1">
+          <div className="hidden md:block mr-4">
             <GoogleAuthButton />
           </div>
+          <DateTimeBox />
         </div>
       </div>
 
@@ -35,9 +35,11 @@ export default function Home() {
       <ScrollProgressBar />
 
       {/* Main Content */}
-      <div className="font-sans min-h-screen 
+      <div
+        className="font-sans min-h-screen 
                       px-4 md:p-4 lg:px-4 xl:px-16 2xl:px-48
-                      flex flex-col lg:flex-row bg-white">
+                      flex flex-col lg:flex-row bg-white"
+      >
         <div className="lg:w-1/3 flex flex-col items-start">
           <Left />
         </div>

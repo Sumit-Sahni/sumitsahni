@@ -43,7 +43,7 @@ const Left = () => {
       initial="hidden"
       animate="visible"
       className="w-full flex flex-col items-center justify-between gap-6 pt-8 pb-12 sticky lg:top-0 
-      bg-neutral-50 shadow-md rounded-3xl border border-gray-200"
+      bg-neutral-50 shadow-md rounded-3xl border border-gray-200 "
     >
       {/* Profile Image */}
       <motion.div

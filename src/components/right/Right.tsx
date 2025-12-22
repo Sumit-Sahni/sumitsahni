@@ -72,8 +72,8 @@ const Right = () => {
         h-auto
         overflow-x-hidden
         overflow-y-auto
-        rounded-3xl px-2
-        sm:px-6
+        rounded-3xl
+       sm:px-6
         py-8 sm:py-8
       "
     >
@@ -135,7 +135,16 @@ const Right = () => {
             className="relative"
           >
             {/* Timeline Line */}
-            <div className="absolute left-3 sm:left-6 top-2 bottom-0 w-0.5 bg-gray-300" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 1.5,
+                ease: "easeInOut",
+              }}
+              className="absolute left-3 sm:left-6 top-2 bottom-0 w-0.5 bg-gray-400/50"
+            />
 
             <div className="space-y-8 sm:space-y-10 pb-6">
               {experiences.map((exp, idx) => (
