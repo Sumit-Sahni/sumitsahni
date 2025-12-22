@@ -72,8 +72,8 @@ const Right = () => {
         h-auto
         overflow-x-hidden
         overflow-y-auto
-        rounded-3xl
-        px-1 sm:px-6
+        rounded-3xl px-2
+        sm:px-6
         py-8 sm:py-8
       "
     >

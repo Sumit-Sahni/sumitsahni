@@ -36,12 +36,12 @@ export default function Home() {
 
       {/* Main Content */}
       <div className="font-sans min-h-screen 
-                      px-6 md:p-4 lg:px-4 xl:px-16 2xl:px-48
+                      px-4 md:p-4 lg:px-4 xl:px-16 2xl:px-48
                       flex flex-col lg:flex-row bg-white">
         <div className="lg:w-1/3 flex flex-col items-start">
           <Left />
         </div>
-        <div className="lg:w-full flex flex-col items-end px-4 md:px-12">
+        <div className="lg:w-full flex flex-col items-end md:px-12">
           <Right />
         </div>
       </div>
