@@ -28,7 +28,7 @@ const Videos = () => {
   return (
     <div className="space-y-2">
       <h2 className="text-xl font-bold text-black ">My Videos</h2>
-      <p className="text-gray-600 inter">
+      <p className="text-gray-600 inter leading-relaxed">
         I have recently started teaching as a hobby, and here are some topics
         that I have covered in the videos below.
       </p>
