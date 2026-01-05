@@ -156,7 +156,7 @@ const Left = () => {
             className="relative text-center mb-8 opacity-0 animate-fadeInUp"
             style={{ animationDelay: "0.2s" }}
           >
-            <h2 className="text-3xl caveat font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2 relative inline-block">
+            <h2 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2 relative inline-block">
               Sumit.A.Sahni
               {/* HR positioned exactly at the bottom of the text */}
               <hr className="absolute left-1/2 -translate-x-1/2 top-full w-38 border-gray-400" />

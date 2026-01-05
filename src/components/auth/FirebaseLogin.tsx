@@ -65,7 +65,7 @@ const GoogleAuthButton = () => {
         // 👤 User Email + Sign Out
         <div className="">
           <span className="text-sm truncate max-w-[200px] px-2">
-            <span className=" text-black mr-2 caveat text-lg">Hello! </span>  <span className=" caveat text-lg">{user.displayName || user.email}</span> 
+            <span className=" text-black mr-2  text-sm">Hello! </span>  <span className="  text-sm">{user.displayName || user.email}</span> 
 
           </span>
 
