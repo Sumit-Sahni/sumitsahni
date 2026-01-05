@@ -1,205 +1,383 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
-import { motion, Variants } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import award from "../../../assets/me.png";
 
-const containerVariants: Variants = {
-  hidden: {
-    opacity: 1,
-    y: 24,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1], // ✅ cubic-bezier (premium feel)
-      staggerChildren: 0.12,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 12,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.4,
-      ease: [0.22, 1, 0.36, 1], // ✅
-    },
-  },
-};
-
-const Left = () => {
+// -------------------- GLASS EFFECT COMPONENT --------------------
+const GlassCard = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="w-full flex flex-col items-center justify-between gap-6 pt-8 pb-12 sticky lg:top-0 
-      bg-neutral-50 shadow-md rounded-3xl border border-gray-200 "
+    <div className={`relative ${className}`}>
+      {/* Glass background with gradient border */}
+      <div className="absolute inset-0 rounded-3xl border-0 sm:border-0 shadow-2xl" />
+      {/* Subtle inner shadow */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-transparent via-transparent to-white/5" />
+      {/* Content */}
+      <div className="relative z-10">{children}</div>
+    </div>
+  );
+};
+
+// -------------------- PREMIUM ICONS --------------------
+const PremiumIcons = {
+  Linkedin: () => (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  Email: () => (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path
+        d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  Github: () => (
+    <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+        fill="currentColor"
+      />
+    </svg>
+  ),
+  Download: () => (
+    <svg
+      className="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
     >
-      {/* Profile Image */}
-      <motion.div
-        variants={itemVariants}
-        whileHover={{ scale: 1.04 }}
-        transition={{ type: "spring", stiffness: 200, damping: 15 }}
-        className="relative group"
-      >
-        <div className="w-32 h-32 rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 shadow-2xl">
-          <Image
-            src={award}
-            alt="Sumit Sahni"
-            className="w-full h-full rounded-full object-cover ring-1 ring-white/80 shadow-lg"
-            priority
-          />
-        </div>
-      </motion.div>
-      {/* Name & Title */}
-      <motion.div variants={itemVariants} className="text-center px-4">
-        <h2 className="text-xl font-semibold text-gray-900 leading-tight">
-          Sumit Sahni
-        </h2>
-        <p className="text-sm text-gray-600 mt-1 font-medium">
-          Cybersecurity & Software Professional
-        </p>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  ),
+  Chevron: () => (
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+    </svg>
+  ),
+};
 
-        {/* Resume Button */}
-        <motion.a
-          whileHover={{ y: -2 }}
-          whileTap={{ scale: 0.97 }}
-          href="https://drive.google.com/file/d/1Ni4juPbmGeDFoA1fjW_PSpS46HFF_vJ9/view?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 mt-4 px-4 py-2 text-sm font-medium rounded-full 
-          bg-gradient-to-r from-[#0a66c2] to-[#004182] text-white
-          hover:shadow-lg hover:shadow-blue-500/30
-          transition-all duration-200 border border-blue-500/50"
-        >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm11.293 3.293a1 1 0 011.414 0l2-2a1 1 0 011.414 0v7.586a1 1 0 01-.707.707h-7.586a1 1 0 010-1.414l2-2a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          Download Resume
-        </motion.a>
-      </motion.div>
-      {/* Social Icons - LinkedIn Style */}{" "}
-      <div className="flex gap-2 p-3 bg-white rounded-2xl transition-all duration-200">
-        {" "}
-        {[
-          {
-            href: "https://www.linkedin.com/in/sumit-sahni-852756204/",
-            icon: (
-              <svg
-                className="w-5 h-5 text-[#0A66C2] hover:text-[#004182]"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {" "}
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z" />{" "}
-              </svg>
-            ),
-            label: "LinkedIn",
-          },
-          {
-            href: "mailto:sumit.123sahni@gmail.com?subject=Hiring",
-            icon: (
-              <svg
-                className="w-5 h-5 text-gray-700 hover:text-gray-900"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {" "}
-                <path d="M22.541 3H1.459C.652 3 0 3.667 0 4.5v15c0 .833.652 1.5 1.459 1.5h21.082c.807 0 1.459-.667 1.459-1.5V4.5c0-.833-.652-1.5-1.459-1.5zM2.058 17.083V6.917l9.942 7.292 9.942-7.292v10.166H2.058zM11.5 12.335L1.459 4.833h21.082L11.5 12.335z" />{" "}
-              </svg>
-            ),
-            label: "Email",
-          },
-          {
-            href: "https://github.com/Sumit-Sahni",
-            icon: (
-              <svg
-                className="w-5 h-5 text-[#333] hover:text-black"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {" "}
-                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />{" "}
-              </svg>
-            ),
-            label: "GitHub",
-          },
-        ].map(({ href, icon, label }, i) => (
-          <a
-            key={i}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-2.5 rounded-xl hover:bg-gray-100 transition-all duration-200 flex items-center justify-center group"
-            title={label}
-            aria-label={label}
+// -------------------- COMPONENT --------------------
+const Left = () => {
+  const [open, setOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setHoverPosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div className=" w-full flex flex-col items-center justify-between gap-2  pb-12 sticky lg:top-0">
+      {/* Main Glass Card */}
+      <GlassCard className="p-8 ">
+        <div className="relative z-20">
+          {/* Hover Light Effect */}
+          <div
+            className="absolute inset-0 overflow-hidden rounded-3xl"
+            onMouseMove={handleMouseMove}
           >
-            {" "}
-            {icon}{" "}
-          </a>
-        ))}{" "}
-      </div>
-      {/* Certifications */}
-      <motion.div variants={itemVariants} className="w-full px-4 space-y-2">
-        <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wider mb-3 pl-1">
-          Certifications
-        </h3>
+            <div
+              className="absolute w-[1800px] h-[50px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-full blur-3xl"
+              style={{
+                left: hoverPosition.x,
+                top: hoverPosition.y,
+                transform: "translate(-50%, -50%)",
+              }}
+            />
+          </div>
 
-        <div className="space-y-1.5">
-          {[
-            {
-              text: "CompTIA Security+",
-              link: "https://www.udemy.com/certificate/UC-7457ca37-4baa-437f-b078-a74931667ee7/",
-              badge: "🔒",
-            },
-            {
-              text: "CCNA 200-301",
-              link: "https://www.udemy.com/certificate/UC-2c9eb698-7086-4d9f-9093-ec7435fb9680/",
-              badge: "🌐",
-            },
-            {
-              text: "Web Development Bootcamp",
-              link: "https://www.udemy.com/certificate/UC-f73ada88-8d74-45bd-9ccf-a717372163d9/",
-              badge: "💻",
-            },
-            {
-              text: "College Project",
-              link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
-              badge: "📚",
-            },
-          ].map((cert, i) => (
-            <motion.a
-              key={i}
-              href={cert.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={itemVariants}
-              whileHover={{ x: 4 }}
-              className="flex items-center gap-2 p-3 rounded-xl bg-gradient-to-r from-gray-50 to-white 
-              border border-gray-200 hover:bg-blue-50/50 hover:shadow-sm
-              transition-all duration-200 text-sm"
-            >
-              <span className="text-lg">{cert.badge}</span>
-              <span className="font-medium">{cert.text}</span>
-            </motion.a>
-          ))}
+          {/* Profile Image with Floating Effect */}
+          <div className="relative mb-8 group">
+            <div className="relative w-40 h-40 mx-auto">
+              {/* Outer Glow */}
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 blur-xl opacity-30" />
+
+              {/* Image Container */}
+              <div className="relative w-full h-full rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 group-hover:scale-105 transition-transform duration-300">
+                <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-sm" />
+                <Image
+                  src={award}
+                  alt="Sumit Sahni"
+                  className="w-full h-full rounded-full object-cover relative z-10"
+                  priority
+                />
+              </div>
+
+              {/* Floating Particles */}
+              {[...Array(2)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-2 h-2 bg-blue-400/50 rounded-full animate-float"
+                  style={{
+                    top: `${20 + i * 20}%`,
+                    left: `${20 + i * 20}%`,
+                    animationDelay: `${i * 0.5}s`,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Name & Title */}
+          <div
+            className="relative text-center mb-8 opacity-0 animate-fadeInUp"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <h2 className="text-3xl caveat font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2 relative inline-block">
+              Sumit.A.Sahni
+              {/* HR positioned exactly at the bottom of the text */}
+              <hr className="absolute left-1/2 -translate-x-1/2 top-full w-38 border-gray-400" />
+            </h2>
+
+            <p className="text-sm text-gray-600 font-light tracking-wide py-1">
+              Engineer <span className="font-extrabold">@ </span>Microsoft
+            </p>
+          </div>
+
+          {/* Premium Resume Button */}
+          <div
+            className="mb-10 opacity-0 animate-fadeInUp"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <div className="relative group block">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
+              <button className="relative w-full px-6 py-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-full text-sm font-medium tracking-wide flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 border border-gray-700/50 group-hover:scale-102">
+                <PremiumIcons.Download />
+                <span>Download Resume</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Collapsible Content */}
+          <div
+            style={{
+              height: isMobile ? (open ? "auto" : "0") : "auto",
+              opacity: isMobile ? (open ? 1 : 0) : 1,
+              overflow: "hidden",
+              transition: "all 0.4s ease-in-out",
+            }}
+          >
+            <div className="space-y-8">
+              {/* Social Icons - Premium Glass Style */}
+              <GlassCard className="p-4 opacity-0 animate-fadeInUp">
+                <div className="flex items-center justify-center gap-3">
+                  {[
+                    {
+                      href: "https://www.linkedin.com/in/sumit-sahni-852756204/",
+                      icon: <PremiumIcons.Linkedin />,
+                      color: "text-[#0A66C2] hover:bg-blue-500/10",
+                    },
+                    {
+                      href: "mailto:sumit.123sahni@gmail.com?subject=Hello",
+                      icon: <PremiumIcons.Email />,
+                      color: "text-gray-700 hover:bg-gray-500/10",
+                    },
+                    {
+                      href: "https://github.com/",
+                      icon: <PremiumIcons.Github />,
+                      color: "text-gray-900 hover:bg-gray-900/10",
+                    },
+                  ].map(({ href, icon, color }, i) => (
+                    <a
+                      key={i}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`p-3 rounded-xl ${color} transition-all duration-300 hover:shadow-lg hover:scale-110`}
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
+              </GlassCard>
+
+              {/* Certifications - Premium List */}
+              <div className="space-y-4">
+                <h3
+                  className="text-xs font-semibold text-gray-500 uppercase tracking-wider text-center opacity-0 animate-fadeInUp"
+                  style={{ animationDelay: "0.8s" }}
+                >
+                  Certifications
+                </h3>
+
+                <div className="space-y-3">
+                  {[
+                    {
+                      text: "CompTIA Security+",
+                      link: "https://www.udemy.com/certificate/UC-7457ca37-4baa-437f-b078-a74931667ee7/",
+                      badge: "🔒",
+                      gradient: "from-blue-500/5 to-blue-500/10",
+                      delay: 0.9,
+                    },
+                    {
+                      text: "CCNA 200-301",
+                      link: "https://www.udemy.com/certificate/UC-2c9eb698-7086-4d9f-9093-ec7435fb9680/",
+                      badge: "🌐",
+                      gradient: "from-purple-500/5 to-purple-500/10",
+                      delay: 1.0,
+                    },
+                    {
+                      text: "Web Development Bootcamp",
+                      link: "https://www.udemy.com/certificate/UC-f73ada88-8d74-45bd-9ccf-a717372163d9/",
+                      badge: "💻",
+                      gradient: "from-cyan-500/5 to-cyan-500/10",
+                      delay: 1.1,
+                    },
+                    {
+                      text: "College Project",
+                      link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
+                      badge: "📚",
+                      gradient: "from-emerald-500/5 to-emerald-500/10",
+                      delay: 1.2,
+                    },
+                  ].map((cert, i) => (
+                    <a
+                      key={i}
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r ${cert.gradient} border border-white/20 hover:border-white/40 transition-all duration-300 group cursor-pointer opacity-0 animate-fadeInUp hover:translate-x-2 hover:scale-102`}
+                      style={{ animationDelay: `${cert.delay}s` }}
+                    >
+                      <span className="text-xl">{cert.badge}</span>
+                      <span className="font-medium text-gray-800 group-hover:text-gray-900">
+                        {cert.text}
+                      </span>
+                      <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <svg
+                          className="w-4 h-4 text-gray-500"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14 5l7 7m0 0l-7 7m7-7H3"
+                          />
+                        </svg>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </GlassCard>
+
+      {/* Mobile Toggle Button - POSITIONED OUTSIDE THE GLASS CARD */}
+      {isMobile && (
+        <button
+          onClick={() => setOpen(!open)}
+          className="mt-4 w-full max-w-xs mx-auto active:scale-95 transition-transform"
+        >
+          <GlassCard className="py-4 px-6">
+            <div className="flex items-center justify-center gap-3 text-gray-700">
+              <span className="text-sm font-medium tracking-wide">
+                {open ? "Show Less" : "Explore More"}
+              </span>
+              <div
+                className={`transition-transform duration-300 ${
+                  open ? "rotate-180" : "rotate-0"
+                }`}
+              >
+                <PremiumIcons.Chevron />
+              </div>
+            </div>
+          </GlassCard>
+        </button>
+      )}
+
+      {/* Floating Decorative Elements */}
+      <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl -z-10" />
+
+      {/* Add CSS animations */}
+      <style jsx global>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(0) translateX(0);
+          }
+          33% {
+            transform: translateY(-20px) translateX(10px);
+          }
+          66% {
+            transform: translateY(-10px) translateX(-10px);
+          }
+        }
+
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-fadeInUp {
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .hover\\:scale-102:hover {
+          transform: scale(1.02);
+        }
+
+        .group:hover .group-hover\\:scale-102 {
+          transform: scale(1.02);
+        }
+
+        .hover\\:scale-110:hover {
+          transform: scale(1.1);
+        }
+
+        .hover\\:translate-x-2:hover {
+          transform: translateX(8px);
+        }
+      `}</style>
+    </div>
   );
 };
 

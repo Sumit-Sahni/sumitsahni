@@ -73,20 +73,18 @@ const Right = () => {
         overflow-x-hidden
         overflow-y-auto
         rounded-3xl
-       sm:px-6
-        py-8 sm:py-8
       "
     >
       {/* ---------------- Tabs ---------------- */}
       <motion.div
         variants={itemVariants}
         className="
-          flex
+          flex flex-row
           gap-3
-          mb-6 sm:mb-10
-          pt-2
-          overflow-x-auto
-          scrollbar-hide
+          mb-15 sm:mb-10
+          pt-4
+          overflow-x-auto 
+          scrollbar-hide shadow-sm sm:shadow-none rounded-2xl pb-4 px-4 items-center
         "
       >
         {[
@@ -110,7 +108,7 @@ const Right = () => {
               whitespace-nowrap
               transition-all
               duration-300
-              cursor-pointer
+              cursor-pointer 
               ${
                 activeTab === tab.id
                   ? "bg-neutral-900/80 text-white shadow-sm shadow-black/40"
@@ -120,6 +118,7 @@ const Right = () => {
           >
             {tab.label}
           </motion.button>
+
         ))}
       </motion.div>
 
@@ -175,7 +174,9 @@ const Right = () => {
                       shadow-md
                       z-10
                       ${
-                        exp.active ? "bg-green-500 animate-spin" : "bg-blue-600"
+                        exp.active
+                          ? "bg-green-600  animate-spin"
+                          : "bg-blue-600"
                       }
                     `}
                   />
@@ -184,7 +185,7 @@ const Right = () => {
                   <div className="ml-8 sm:ml-16 flex-1">
                     <div className="mb-3">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-base sm:text-lg font-bold text-black">
+                        <h3 className="text-base sm:text-lg text-black font-semibold">
                           {exp.title}
                         </h3>
                         <span className="text-sm sm:text-md text-blue-600 font-medium">
@@ -196,7 +197,7 @@ const Right = () => {
                       </p>
                     </div>
 
-                    <ul className="space-y-2">
+                    <ul className="space-y-2"> 
                       {exp.details.map((detail, i) => (
                         <motion.li
                           key={i}
@@ -206,7 +207,7 @@ const Right = () => {
                           className="flex items-start"
                         >
                           <span className="mt-2 mr-3 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
-                          <span className="text-sm text-gray-700 leading-relaxed">
+                          <span className="text-sm text-gray-700 leading-relaxed ">
                             {detail}
                           </span>
                         </motion.li>

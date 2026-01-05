@@ -1,3 +1,5 @@
+" use client";
+
 import React from "react";
 
 const Projects = () => {
@@ -11,7 +13,7 @@ const Projects = () => {
           Vulnerable Web App with Centralized Log Monitoring
         </h2>
         <div>
-            <a href="https://github.com/Sumit-Sahni/Threat-Analysis" className=" text-blue-700">Link</a>
+            {/* <a href="https://github.com/Sumit-Sahni/Threat-Analysis" className=" text-blue-700">Link</a> */}
         </div>
         </div>
        

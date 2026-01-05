@@ -43,26 +43,30 @@ const GoogleAuthButton = () => {
     <div className="flex flex-row items-center gap-3">
       {!user ? (
         // 🔐 Google Login Button
-        <button
-          onClick={handleGoogleLogin}
-          disabled={loading}
-          className="cursor-pointer flex items-center gap-2 h-8 px-3 rounded-full
+        <>
+          <span className="text-md">To know more!</span>
+          <button
+            onClick={handleGoogleLogin}
+            disabled={loading}
+            className="cursor-pointer flex items-center gap-2 h-8 px-3 rounded-full
              border border-gray-300 bg-white text-xs text-gray-700
              hover:bg-gray-50 transition disabled:opacity-50"
-        >
-          <Image
-            src="https://www.svgrepo.com/show/475656/google-color.svg"
-            alt="Google"
-            width={14}
-            height={14}
-          />
-          <span className="leading-none">Google</span>
-        </button>
+          >
+            <Image
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google"
+              width={14}
+              height={14}
+            />
+            <span className="leading-none">Google</span>
+          </button>
+        </>
       ) : (
         // 👤 User Email + Sign Out
         <div className="">
-          <span className="text-sm truncate max-w-[200px] px-2 text-blue-500">
-           <span className=" text-black mr-2 ">Hello!</span> {user.email}
+          <span className="text-sm truncate max-w-[200px] px-2">
+            <span className=" text-black mr-2 caveat text-lg">Hello! </span>  <span className=" caveat text-lg">{user.displayName || user.email}</span> 
+
           </span>
 
           <button

@@ -9,7 +9,7 @@ import ScrollProgressBar from "@/components/scrollbar/ScrollProgressBar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-fill sm:bg-cover bg-center bg-no-repeat">
+    <div className="min-h-screen bg-fill sm:bg-cover bg-center bg-no-repeat to-white/5 from-white/20 via-white/10 bg-gradient-to-b">
       {/* Header */}
       <div
         className="top-0 left-0 right-0 w-full px-4 py-4
@@ -17,7 +17,7 @@ export default function Home() {
                       text-black text-xs"
       >
         {/* Left */}
-        <h1 className="text-xs p-1 px-2 rounded-sm md:text-md font-bold bg-white text-black">
+        <h1 className="text-xs p-1 px-2 rounded-sm md:text-md font-bold text-black">
           portfolio
         </h1>
 
@@ -40,10 +40,10 @@ export default function Home() {
                       px-4 md:p-4 lg:px-4 xl:px-16 2xl:px-48
                       flex flex-col lg:flex-row bg-white"
       >
-        <div className="lg:w-1/3 flex flex-col items-start">
+        <div className=" mx-auto w-full sm:w-1/3 xl:w-1/3  ">
           <Left />
         </div>
-        <div className="lg:w-full flex flex-col items-end md:px-12">
+        <div className="lg:w-full flex flex-col items-end md:px-4">
           <Right />
         </div>
       </div>
