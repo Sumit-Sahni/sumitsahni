@@ -3,7 +3,17 @@ export const experiences = [
     title: "Eng",
     company: "@Microsoft",
     duration: "January 2026 - Present",
-    details: [],
+    details: [
+      "Provide technical support for Windows operating systems, diagnosing and resolving software and system-related issues.",
+      "Troubleshoot Active Directory Services, including user account management, group memberships, password resets, and authentication issues.",
+      "Investigate and resolve Windows login, domain join, Group Policy, DNS, and network connectivity problems.",
+      "Support enterprise customers by analyzing logs, identifying root causes, and implementing effective solutions.",
+      "Assist with Windows Server administration and Active Directory replication, DNS, and domain controller health checks.",
+      "Use remote troubleshooting tools and PowerShell to diagnose and resolve technical issues efficiently.",
+      "Collaborate with cross-functional engineering and escalation teams to resolve complex customer incidents.",
+      "Document troubleshooting steps, resolutions, and best practices to improve knowledge sharing and customer experience.",
+      "Ensure timely case management by meeting SLA targets while maintaining high customer satisfaction.",
+    ],
     logo: "https://png.pngtree.com/element_our/sm/20180627/sm_5b334610deb59.jpg",
     active: true,
   },
@@ -11,10 +21,7 @@ export const experiences = [
     title: "MERN",
     company: "Engineer's Cradle",
     duration: "August 2024 to Nov 2024",
-    details: [
-        "Typescript",
-        "Next JS"
-    ],
+    details: ["Typescript", "Next JS"],
     active: false,
   },
   {
@@ -39,5 +46,4 @@ export const experiences = [
     ],
     active: false,
   },
-  
 ];
