@@ -1,7 +1,7 @@
 export const experiences = [
   {
     title: "Eng",
-    company: "@Microsoft",
+    company: "Microsoft",
     duration: "January 2026 - Present",
     details: [
       "Provide technical support for Windows operating systems, diagnosing and resolving software and system-related issues.",

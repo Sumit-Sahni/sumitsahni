@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import award from "../../../assets/me.png";
 
-// -------------------- GLASS EFFECT COMPONENT --------------------
+// -------------------- TERMINAL CARD --------------------
 const GlassCard = ({
   children,
   className = "",
@@ -14,17 +14,23 @@ const GlassCard = ({
 }) => {
   return (
     <div className={`relative ${className}`}>
-      {/* Glass background with gradient border */}
-      <div className="absolute inset-0 rounded-3xl border-0 sm:border-0 shadow-2xl" />
-      {/* Subtle inner shadow */}
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-transparent via-transparent to-white/5" />
+      {/* Dark terminal surface */}
+      <div className="absolute inset-0 rounded-xl bg-[#0a0e0c] border border-emerald-500/20 shadow-[0_0_25px_-10px_rgba(16,185,129,0.35)]" />
+      {/* Faint scanline texture */}
+      <div
+        className="absolute inset-0 rounded-xl opacity-[0.04]"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, #10b981 0px, #10b981 1px, transparent 1px, transparent 3px)",
+        }}
+      />
       {/* Content */}
       <div className="relative z-10">{children}</div>
     </div>
   );
 };
 
-// -------------------- PREMIUM ICONS --------------------
+// -------------------- ICONS --------------------
 const PremiumIcons = {
   Linkedin: () => (
     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
@@ -100,17 +106,17 @@ const Left = () => {
   };
 
   return (
-    <div className=" w-full flex flex-col items-center justify-between gap-2  pb-12 sticky lg:top-0">
-      {/* Main Glass Card */}
+    <div className=" w-full flex flex-col items-center justify-between gap-2  pb-12 sticky lg:top-0 font-mono">
+      {/* Main Terminal Card */}
       <GlassCard className="p-8 ">
         <div className="relative z-20">
-          {/* Hover Light Effect */}
+          {/* Hover Scan Effect */}
           <div
-            className="absolute inset-0 overflow-hidden rounded-3xl"
+            className="absolute inset-0 overflow-hidden rounded-xl"
             onMouseMove={handleMouseMove}
           >
             <div
-              className="absolute w-[1800px] h-[50px] bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-cyan-500/10 rounded-full blur-3xl"
+              className="absolute w-[1800px] h-[50px] bg-emerald-500/5 rounded-full blur-3xl"
               style={{
                 left: hoverPosition.x,
                 top: hoverPosition.y,
@@ -119,15 +125,25 @@ const Left = () => {
             />
           </div>
 
-          {/* Profile Image with Floating Effect */}
+          {/* Terminal top bar */}
+          <div className="flex items-center gap-1.5 mb-6 opacity-70">
+            <span className="w-2 h-2 rounded-full bg-emerald-500/40" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500/40" />
+            <span className="w-2 h-2 rounded-full bg-emerald-500/40" />
+            <span className="ml-2 text-[10px] tracking-widest text-emerald-500/60">
+              session --whoami
+            </span>
+          </div>
+
+          {/* Profile Image */}
           <div className="relative mb-8 group">
-            <div className="relative w-40 h-40 mx-auto">
+            <div className="relative w-40 h-40 mx-auto ">
               {/* Outer Glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 blur-xl opacity-30" />
+              <div className="absolute inset-0 rounded-full bg-emerald-500/20 blur-xl opacity-40 " />
 
               {/* Image Container */}
-              <div className="relative w-full h-full rounded-full p-1 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 group-hover:scale-105 transition-transform duration-300">
-                <div className="absolute inset-0 rounded-full bg-white/10 backdrop-blur-sm" />
+              <div className="relative w-full h-full rounded-full p-1 border border-emerald-500/40 group-hover:border-emerald-400 transition-colors duration-300">
+                <div className="absolute inset-0 rounded-full bg-black/40" />
                 <Image
                   src={award}
                   alt="Sumit Sahni"
@@ -136,18 +152,11 @@ const Left = () => {
                 />
               </div>
 
-              {/* Floating Particles */}
-              {[...Array(2)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-2 h-2 bg-blue-400/50 rounded-full animate-float"
-                  style={{
-                    top: `${20 + i * 20}%`,
-                    left: `${20 + i * 20}%`,
-                    animationDelay: `${i * 0.5}s`,
-                  }}
-                />
-              ))}
+              {/* Corner brackets */}
+              <span className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-emerald-500/50" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 border-t border-r border-emerald-500/50" />
+              <span className="absolute -bottom-1 -left-1 w-3 h-3 border-b border-l border-emerald-500/50" />
+              <span className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-emerald-500/50" />
             </div>
           </div>
 
@@ -156,29 +165,30 @@ const Left = () => {
             className="relative text-center mb-8 opacity-0 animate-fadeInUp"
             style={{ animationDelay: "0.2s" }}
           >
-            <h2 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent mb-2 relative inline-block">
+            <p className="text-[11px] text-emerald-500/50 tracking-widest mb-1">
+              &gt; whoami
+            </p>
+            <h2 className="text-xl font-bold text-emerald-400 tracking-wide relative inline-block">
               Sumit.A.Sahni
-              {/* HR positioned exactly at the bottom of the text */}
-              <hr className="absolute left-1/2 -translate-x-1/2 top-full w-38 border-gray-400" />
+              <span className="inline-block w-0.5 h-4 bg-emerald-400/70 ml-1 align-middle animate-pulse" />
+              <hr className="mt-2 border-emerald-500/20" />
             </h2>
 
-            <p className="text-sm text-gray-600 font-light tracking-wide py-1">
-              Engineer <span className="font-extrabold">@ </span>Microsoft
+            <p className="text-xs text-gray-400 tracking-wide py-1">
+              <span className="text-emerald-500/60">role:</span> Engineer{" "}
+              <span className="text-emerald-500/60">@</span> Microsoft
             </p>
           </div>
 
-          {/* Premium Resume Button */}
+          {/* Resume Button */}
           <div
             className="mb-10 opacity-0 animate-fadeInUp"
             style={{ animationDelay: "0.4s" }}
           >
-            <div className="relative group block">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-              <button className="relative w-full px-6 py-3 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-full text-sm font-medium tracking-wide flex items-center justify-center gap-2 hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 border border-gray-700/50 group-hover:scale-102">
-                <PremiumIcons.Download />
-                <span>Download Resume</span>
-              </button>
-            </div>
+            <button className="relative w-full px-6 py-3 bg-black text-emerald-400 border border-emerald-500/40 rounded-md text-sm font-medium tracking-wide flex items-center justify-center gap-2 hover:bg-emerald-500 hover:text-black transition-all duration-300">
+              <PremiumIcons.Download />
+              <span>./download-resume.sh</span>
+            </button>
           </div>
 
           {/* Collapsible Content */}
@@ -191,32 +201,29 @@ const Left = () => {
             }}
           >
             <div className="space-y-8">
-              {/* Social Icons - Premium Glass Style */}
+              {/* Social Icons */}
               <GlassCard className="p-4 opacity-0 animate-fadeInUp">
                 <div className="flex items-center justify-center gap-3">
                   {[
                     {
                       href: "https://www.linkedin.com/in/sumit-sahni-852756204/",
                       icon: <PremiumIcons.Linkedin />,
-                      color: "text-[#0A66C2] hover:bg-blue-500/10",
                     },
                     {
                       href: "mailto:sumit.123sahni@gmail.com?subject=Hello",
                       icon: <PremiumIcons.Email />,
-                      color: "text-gray-700 hover:bg-gray-500/10",
                     },
                     {
                       href: "https://github.com/",
                       icon: <PremiumIcons.Github />,
-                      color: "text-gray-900 hover:bg-gray-900/10",
                     },
-                  ].map(({ href, icon, color }, i) => (
+                  ].map(({ href, icon }, i) => (
                     <a
                       key={i}
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 rounded-xl ${color} transition-all duration-300 hover:shadow-lg hover:scale-110`}
+                      className="p-3 rounded-md border border-emerald-500/20 text-emerald-500/70 hover:text-emerald-300 hover:border-emerald-400/60 transition-all duration-300"
                     >
                       {icon}
                     </a>
@@ -224,43 +231,39 @@ const Left = () => {
                 </div>
               </GlassCard>
 
-              {/* Certifications - Premium List */}
+              {/* Certifications - Terminal List */}
               <div className="space-y-4">
                 <h3
-                  className="text-xs font-semibold text-gray-500 uppercase tracking-wider text-center opacity-0 animate-fadeInUp"
+                  className="text-[11px] font-semibold text-emerald-500/60 uppercase tracking-widest text-center opacity-0 animate-fadeInUp"
                   style={{ animationDelay: "0.8s" }}
                 >
-                  Certifications
+                  &gt; ls ./certifications
                 </h3>
 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {[
                     {
                       text: "CompTIA Security+",
                       link: "https://www.udemy.com/certificate/UC-7457ca37-4baa-437f-b078-a74931667ee7/",
-                      badge: "🔒",
-                      gradient: "from-blue-500/5 to-blue-500/10",
+                      tag: "sec",
                       delay: 0.9,
                     },
                     {
                       text: "CCNA 200-301",
                       link: "https://www.udemy.com/certificate/UC-2c9eb698-7086-4d9f-9093-ec7435fb9680/",
-                      badge: "🌐",
-                      gradient: "from-purple-500/5 to-purple-500/10",
+                      tag: "net",
                       delay: 1.0,
                     },
                     {
                       text: "Web Development Bootcamp",
                       link: "https://www.udemy.com/certificate/UC-f73ada88-8d74-45bd-9ccf-a717372163d9/",
-                      badge: "💻",
-                      gradient: "from-cyan-500/5 to-cyan-500/10",
+                      tag: "dev",
                       delay: 1.1,
                     },
                     {
                       text: "College Project",
                       link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
-                      badge: "📚",
-                      gradient: "from-emerald-500/5 to-emerald-500/10",
+                      tag: "doc",
                       delay: 1.2,
                     },
                   ].map((cert, i) => (
@@ -269,28 +272,18 @@ const Left = () => {
                       href={cert.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r ${cert.gradient} border border-white/20 hover:border-white/40 transition-all duration-300 group cursor-pointer opacity-0 animate-fadeInUp hover:translate-x-2 hover:scale-102`}
+                      className="flex items-center gap-3 p-3 rounded-md bg-black/30 border border-emerald-500/10 hover:border-emerald-400/50 transition-all duration-300 group cursor-pointer opacity-0 animate-fadeInUp"
                       style={{ animationDelay: `${cert.delay}s` }}
                     >
-                      <span className="text-xl">{cert.badge}</span>
-                      <span className="font-medium text-gray-800 group-hover:text-gray-900">
+                      <span className="text-[10px] font-bold text-emerald-500/60 border border-emerald-500/30 rounded px-1.5 py-0.5 tracking-wider">
+                        {cert.tag}
+                      </span>
+                      <span className="text-sm text-gray-300 group-hover:text-emerald-300 transition-colors">
                         {cert.text}
                       </span>
-                      <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <svg
-                          className="w-4 h-4 text-gray-500"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M14 5l7 7m0 0l-7 7m7-7H3"
-                          />
-                        </svg>
-                      </div>
+                      <span className="ml-auto text-emerald-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        &gt;
+                      </span>
                     </a>
                   ))}
                 </div>
@@ -300,16 +293,16 @@ const Left = () => {
         </div>
       </GlassCard>
 
-      {/* Mobile Toggle Button - POSITIONED OUTSIDE THE GLASS CARD */}
+      {/* Mobile Toggle Button */}
       {isMobile && (
         <button
           onClick={() => setOpen(!open)}
           className="mt-4 w-full max-w-xs mx-auto active:scale-95 transition-transform"
         >
           <GlassCard className="py-4 px-6">
-            <div className="flex items-center justify-center gap-3 text-gray-700">
+            <div className="flex items-center justify-center gap-3 text-emerald-400/80">
               <span className="text-sm font-medium tracking-wide">
-                {open ? "Show Less" : "Explore More"}
+                {open ? "collapse --all" : "expand --all"}
               </span>
               <div
                 className={`transition-transform duration-300 ${
@@ -324,24 +317,11 @@ const Left = () => {
       )}
 
       {/* Floating Decorative Elements */}
-      <div className="absolute top-0 left-0 w-32 h-32 bg-blue-500/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-0 left-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 right-0 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl -z-10" />
 
-      {/* Add CSS animations */}
+      {/* Animations */}
       <style jsx global>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0) translateX(0);
-          }
-          33% {
-            transform: translateY(-20px) translateX(10px);
-          }
-          66% {
-            transform: translateY(-10px) translateX(-10px);
-          }
-        }
-
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -353,28 +333,8 @@ const Left = () => {
           }
         }
 
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
         .animate-fadeInUp {
           animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .hover\\:scale-102:hover {
-          transform: scale(1.02);
-        }
-
-        .group:hover .group-hover\\:scale-102 {
-          transform: scale(1.02);
-        }
-
-        .hover\\:scale-110:hover {
-          transform: scale(1.1);
-        }
-
-        .hover\\:translate-x-2:hover {
-          transform: translateX(8px);
         }
       `}</style>
     </div>

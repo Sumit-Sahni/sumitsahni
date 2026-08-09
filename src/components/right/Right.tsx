@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Videos from "@/components/video/Video";
 import Projects from "@/components/projects/Projects";
+import PortfolioTerminal from "@/components/terminal/PortfolioTerminal";
 import { experiences } from "@/data/exp";
 
 /* ---------------------------------- */
@@ -58,7 +59,7 @@ const tabContentVariants: Variants = {
 
 const Right = () => {
   const [activeTab, setActiveTab] = useState<
-    "experience" | "videos" | "projects"
+    "experience" | "videos" | "projects" | "terminal"
   >("experience");
 
   return (
@@ -72,7 +73,12 @@ const Right = () => {
         h-auto
         overflow-x-hidden
         overflow-y-auto
-        rounded-3xl
+        rounded-xl
+        font-mono
+        bg-black
+        border border-emerald-500/20
+        shadow-[0_0_25px_-10px_rgba(16,185,129,0.35)]
+        p-4 sm:p-6
       "
     >
       {/* ---------------- Tabs ---------------- */}
@@ -80,45 +86,50 @@ const Right = () => {
         variants={itemVariants}
         className="
           flex flex-row
-          gap-3
+          gap-2
           mb-15 sm:mb-10
-          pt-4
-          overflow-x-auto 
-          scrollbar-hide shadow-sm sm:shadow-none rounded-2xl pb-4 px-4 items-center
+          pt-2
+          overflow-x-auto
+          scrollbar-hide rounded-lg pb-4 px-1 items-center
+          border-b border-emerald-500/10
         "
       >
         {[
-          { id: "experience", label: "Experience" },
-          { id: "videos", label: "Videos" },
-          { id: "projects", label: "Projects" },
+          { id: "experience", label: "~/experience" },
+          { id: "videos", label: "~/videos" },
+          { id: "projects", label: "~/projects" },
+          { id: "terminal", label: "~/terminal" },
         ].map((tab) => (
           <motion.button
             key={tab.id}
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.96 }}
             onClick={() =>
-              setActiveTab(tab.id as "experience" | "videos" | "projects")
+              setActiveTab(
+                tab.id as "experience" | "videos" | "projects" | "terminal"
+              )
             }
             className={`
               relative
               px-4 py-2
-              text-sm sm:text-base
+              text-xs sm:text-sm
               font-medium
-              rounded-full
+              tracking-wide
+              rounded-md
               whitespace-nowrap
               transition-all
               duration-300
-              cursor-pointer 
+              cursor-pointer
+              border
               ${
                 activeTab === tab.id
-                  ? "bg-neutral-900/80 text-white shadow-sm shadow-black/40"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                  ? "bg-emerald-500 text-black border-emerald-400"
+                  : "bg-transparent text-emerald-500/60 border-emerald-500/20 hover:text-emerald-300 hover:border-emerald-400/50"
               }
             `}
           >
             {tab.label}
           </motion.button>
-
         ))}
       </motion.div>
 
@@ -133,6 +144,10 @@ const Right = () => {
             exit="exit"
             className="relative"
           >
+            <p className="text-[11px] text-emerald-500/50 tracking-widest mb-4 pl-1">
+              &gt; cat experience.log
+            </p>
+
             {/* Timeline Line */}
             <motion.div
               initial={{ opacity: 0 }}
@@ -142,10 +157,10 @@ const Right = () => {
                 duration: 1.5,
                 ease: "easeInOut",
               }}
-              className="absolute left-3 sm:left-6 top-2 bottom-0 w-0.5 bg-gray-400/50"
+              className="absolute left-3 sm:left-6 top-10 bottom-0 w-px bg-emerald-500/20"
             />
 
-            <div className="space-y-8 sm:space-y-10 pb-6">
+            <div className="space-y-6 sm:space-y-8 pb-6">
               {experiences.map((exp, idx) => (
                 <motion.div
                   key={idx}
@@ -168,28 +183,27 @@ const Right = () => {
                       absolute
                       left-2 sm:left-4
                       top-1
-                      w-3 h-3 sm:w-4 sm:h-4
+                      w-3 h-3 sm:w-3.5 sm:h-3.5
                       rounded-full
-                      border-4 border-white
-                      shadow-md
+                      border-2 border-[#0a0e0c]
                       z-10
                       ${
                         exp.active
-                          ? "bg-green-600  animate-spin"
-                          : "bg-blue-600"
+                          ? "bg-blue-400 animate-pulse"
+                          : "bg-gray-500"
                       }
                     `}
                   />
 
                   {/* Content */}
-                  <div className="ml-8 sm:ml-16 flex-1">
+                  <div className="ml-8 sm:ml-16 flex-1 border border-emerald-500/10 hover:border-emerald-400/30 transition-colors duration-300 rounded-md p-4 bg-black/20">
                     <div className="mb-3">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-base sm:text-lg text-black font-semibold">
+                        <h3 className="text-base sm:text-lg text-emerald-300 font-semibold">
                           {exp.title}
                         </h3>
-                        <span className="text-sm sm:text-md text-blue-600 font-medium">
-                          {exp.company}
+                        <span className="text-sm sm:text-md text-blue-400 font-medium">
+                          @ {exp.company}
                         </span>
                       </div>
                       <p className="text-xs sm:text-sm text-gray-500 font-medium">
@@ -197,7 +211,7 @@ const Right = () => {
                       </p>
                     </div>
 
-                    <ul className="space-y-2"> 
+                    <ul className="space-y-2">
                       {exp.details.map((detail, i) => (
                         <motion.li
                           key={i}
@@ -206,8 +220,10 @@ const Right = () => {
                           transition={{ delay: i * 0.05 }}
                           className="flex items-start"
                         >
-                          <span className="mt-2 mr-3 w-1.5 h-1.5 bg-gray-400 rounded-full flex-shrink-0" />
-                          <span className="text-sm text-gray-700 leading-relaxed ">
+                          <span className="mt-0.5 mr-2 text-emerald-500/50 text-xs flex-shrink-0">
+                            &gt;
+                          </span>
+                          <span className="text-sm text-gray-300 leading-relaxed">
                             {detail}
                           </span>
                         </motion.li>
@@ -242,6 +258,20 @@ const Right = () => {
           >
             <Projects />
           </motion.div>
+        )}
+
+        {activeTab === "terminal" && (
+          <div className=" p-3.5 sm:p-6">
+            <motion.div
+              key="terminal"
+              variants={tabContentVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+            >
+              <PortfolioTerminal />
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </motion.div>
