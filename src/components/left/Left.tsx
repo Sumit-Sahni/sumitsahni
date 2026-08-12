@@ -180,8 +180,7 @@ const Left = () => {
             </div>
             
             <h2 className="text-2xl font-light text-gray-800 tracking-wide relative inline-block">
-              sumit@sahni
-              <span className="inline-block w-0.5 h-5 bg-blue-500 ml-1 align-middle animate-pulse" />
+              sumit sahni
             </h2>
             
             <div className="mt-3 flex items-center justify-center gap-2 text-sm font-mono text-gray-500">
