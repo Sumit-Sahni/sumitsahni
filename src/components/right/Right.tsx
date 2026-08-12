@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Videos from "@/components/video/Video";
 import Projects from "@/components/projects/Projects";
-import PortfolioTerminal from "@/components/terminal/PortfolioTerminal";
 import { experiences } from "@/data/exp";
 
 /* ---------------------------------- */
@@ -53,78 +52,163 @@ const tabContentVariants: Variants = {
   },
 };
 
+// Terminal Icons
+const TerminalIcons = {
+  Terminal: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="4 17 10 11 4 5" />
+      <line x1="12" y1="19" x2="20" y2="19" />
+    </svg>
+  ),
+  Folder: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
+};
+
 /* ---------------------------------- */
 /* Component */
 /* ---------------------------------- */
 
 const Right = () => {
   const [activeTab, setActiveTab] = useState<
-    "experience" | "videos" | "projects" | "terminal"
+    "experience" | "videos" | "projects"
   >("experience");
+  
+  const [bgColor, setBgColor] = useState("bg-white");
+  const [terminalCommand, setTerminalCommand] = useState("~/summary");
+
+  const linuxCommands = [
+    "~/cat",         
+    "~/cd",
+    "~/ls",
+    "~/pwd",
+    "~/echo",
+    "~/grep",
+    "~/find",
+    "~/mkdir",
+    "~/rm",
+    "~/cp",
+    "~/mv",
+    "~/chmod",
+    "~/ps",
+    "~/top",
+    "~/df",
+    "~/du",
+    "~/history",
+    "~/clear",
+    "~/exit",
+    "~/whoami"
+  ];
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    let timeout: NodeJS.Timeout;
+
+    const startRotation = () => {
+      let index = 0;
+      
+      // Initial change after 3 seconds
+      timeout = setTimeout(() => {
+        interval = setInterval(() => {
+          index = (index + 1) % linuxCommands.length;
+          setTerminalCommand(linuxCommands[index]);
+        }, 1000); // Change every 2 seconds
+      }, 0.000); // Start after 0 seconds
+    };
+
+    startRotation();
+
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, []);
+
+  const handleDotClick = (color: string) => {
+    setBgColor(color);
+    // Reset after 3 seconds
+    setTimeout(() => {
+      setBgColor("bg-white");
+    }, 3000);
+  };
 
   return (
     <motion.div
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="
+      className={`
         w-full
         max-w-full
         h-auto
         overflow-x-hidden
         overflow-y-auto
         rounded-xl
-        font-mono
-        bg-black
-        border border-emerald-500/20
-        shadow-[0_0_25px_-10px_rgba(16,185,129,0.35)]
+        ${bgColor}
+        border border-gray-200/80
+        shadow-[0_2px_20px_-8px_rgba(0,0,0,0.06)]
         p-4 sm:p-6
-      "
+        transition-colors
+        duration-500
+        ease-in-out
+      `}
     >
+      {/* ---------------- Terminal Header ---------------- */}
+      <motion.div
+        variants={itemVariants}
+        className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200"
+      >
+        <span className="ml-3 text-[11px] text-gray-600 tracking-wider font-mono transition-all duration-300">
+          {terminalCommand}
+        </span>
+      </motion.div>
+
       {/* ---------------- Tabs ---------------- */}
       <motion.div
         variants={itemVariants}
         className="
           flex flex-row
-          gap-2
-          mb-15 sm:mb-10
-          pt-2
+          gap-1
+          mb-8
+          pt-1
           overflow-x-auto
-          scrollbar-hide rounded-lg pb-4 px-1 items-center
-          border-b border-emerald-500/10
+          scrollbar-hide
+          pb-3
+          px-0.5
+          items-center
         "
       >
         {[
           { id: "experience", label: "~/experience" },
           { id: "videos", label: "~/videos" },
           { id: "projects", label: "~/projects" },
-          { id: "terminal", label: "~/terminal" },
         ].map((tab) => (
           <motion.button
             key={tab.id}
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.96 }}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.97 }}
             onClick={() =>
               setActiveTab(
-                tab.id as "experience" | "videos" | "projects" | "terminal"
+                tab.id as "experience" | "videos" | "projects"
               )
             }
             className={`
               relative
-              px-4 py-2
-              text-xs sm:text-sm
-              font-medium
+              px-4 py-2.5
+              text-xs
+              font-mono
               tracking-wide
-              rounded-md
+              rounded-lg
               whitespace-nowrap
               transition-all
               duration-300
               cursor-pointer
-              border
               ${
                 activeTab === tab.id
-                  ? "bg-emerald-500 text-black border-emerald-400"
-                  : "bg-transparent text-emerald-500/60 border-emerald-500/20 hover:text-emerald-300 hover:border-emerald-400/50"
+                  ? "bg-gray-900 text-white border border-blue-400"
+                  : "text-gray-500 hover:text-gray-800 hover:bg-gray-50 border border-transparent hover:border-gray-200"
               }
             `}
           >
@@ -144,9 +228,10 @@ const Right = () => {
             exit="exit"
             className="relative"
           >
-            <p className="text-[11px] text-emerald-500/50 tracking-widest mb-4 pl-1">
-              &gt; cat experience.log
-            </p>
+            <div className="flex items-center gap-2 text-[11px] text-gray-400 font-mono mb-5">
+              <TerminalIcons.Terminal />
+              <span>cat experience.log</span>
+            </div>
 
             {/* Timeline Line */}
             <motion.div
@@ -157,15 +242,15 @@ const Right = () => {
                 duration: 1.5,
                 ease: "easeInOut",
               }}
-              className="absolute left-3 sm:left-6 top-10 bottom-0 w-px bg-emerald-500/20"
+              className="absolute left-3 sm:left-6 top-12 bottom-0 w-px bg-gray-200"
             />
 
-            <div className="space-y-6 sm:space-y-8 pb-6">
+            <div className="space-y-8 pb-6">
               {experiences.map((exp, idx) => (
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ x: 4 }}
                   transition={{ type: "spring", stiffness: 120, damping: 18 }}
                   className="
                     relative
@@ -182,31 +267,32 @@ const Right = () => {
                     className={`
                       absolute
                       left-2 sm:left-4
-                      top-1
-                      w-3 h-3 sm:w-3.5 sm:h-3.5
+                      top-1.5
+                      w-3.5 h-3.5
                       rounded-full
-                      border-2 border-[#0a0e0c]
+                      border-2 border-white
                       z-10
                       ${
                         exp.active
-                          ? "bg-blue-400 animate-pulse"
-                          : "bg-gray-500"
+                          ? "bg-blue-500 animate-pulse"
+                          : "bg-gray-300"
                       }
                     `}
                   />
 
                   {/* Content */}
-                  <div className="ml-8 sm:ml-16 flex-1 border border-emerald-500/10 hover:border-emerald-400/30 transition-colors duration-300 rounded-md p-4 bg-black/20">
+                  <div className="ml-10 sm:ml-16 flex-1 border border-gray-200 hover:border-blue-400 transition-colors duration-300 rounded-lg p-4 bg-gray-50/50">
                     <div className="mb-3">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="text-base sm:text-lg text-emerald-300 font-semibold">
+                        <span className="text-[10px] text-gray-400 font-mono">$</span>
+                        <h3 className="text-base text-gray-800 font-mono">
                           {exp.title}
                         </h3>
-                        <span className="text-sm sm:text-md text-blue-400 font-medium">
+                        <span className="text-sm text-blue-600 font-mono">
                           @ {exp.company}
                         </span>
                       </div>
-                      <p className="text-xs sm:text-sm text-gray-500 font-medium">
+                      <p className="text-xs text-gray-400 font-mono">
                         {exp.duration}
                       </p>
                     </div>
@@ -220,10 +306,10 @@ const Right = () => {
                           transition={{ delay: i * 0.05 }}
                           className="flex items-start"
                         >
-                          <span className="mt-0.5 mr-2 text-emerald-500/50 text-xs flex-shrink-0">
-                            &gt;
+                          <span className="mt-0.5 mr-3 text-gray-400 text-xs flex-shrink-0">
+                            ▸
                           </span>
-                          <span className="text-sm text-gray-300 leading-relaxed">
+                          <span className="text-sm text-gray-600 leading-relaxed">
                             {detail}
                           </span>
                         </motion.li>
@@ -244,6 +330,10 @@ const Right = () => {
             animate="visible"
             exit="exit"
           >
+            <div className="flex items-center gap-2 text-[11px] text-gray-400 font-mono mb-5">
+              <span>▶</span>
+              <span>ls -la ./videos/</span>
+            </div>
             <Videos />
           </motion.div>
         )}
@@ -256,22 +346,12 @@ const Right = () => {
             animate="visible"
             exit="exit"
           >
+            <div className="flex items-center gap-2 text-[11px] text-gray-400 font-mono mb-5">
+              <TerminalIcons.Folder />
+              <span>ls -la ./projects/</span>
+            </div>
             <Projects />
           </motion.div>
-        )}
-
-        {activeTab === "terminal" && (
-          <div className=" p-3.5 sm:p-6">
-            <motion.div
-              key="terminal"
-              variants={tabContentVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              <PortfolioTerminal />
-            </motion.div>
-          </div>
         )}
       </AnimatePresence>
     </motion.div>

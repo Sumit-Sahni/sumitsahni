@@ -4,34 +4,26 @@ import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import award from "../../../assets/me.png";
 
-// -------------------- TERMINAL CARD --------------------
-const GlassCard = ({
+// -------------------- CARD --------------------
+const TerminalCard = ({
   children,
   className = "",
+  bgColor = "bg-white",
 }: {
   children: React.ReactNode;
   className?: string;
+  bgColor?: string;
 }) => {
   return (
     <div className={`relative ${className}`}>
-      {/* Dark terminal surface */}
-      <div className="absolute inset-0 rounded-xl bg-[#0a0e0c] border border-emerald-500/20 shadow-[0_0_25px_-10px_rgba(16,185,129,0.35)]" />
-      {/* Faint scanline texture */}
-      <div
-        className="absolute inset-0 rounded-xl opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, #10b981 0px, #10b981 1px, transparent 1px, transparent 3px)",
-        }}
-      />
-      {/* Content */}
+      <div className={`absolute inset-0 rounded-xl ${bgColor} border border-gray-200/80 shadow-[0_2px_20px_-8px_rgba(0,0,0,0.06)] transition-colors duration-500 ease-in-out`} />
       <div className="relative z-10">{children}</div>
     </div>
   );
 };
 
 // -------------------- ICONS --------------------
-const PremiumIcons = {
+const TerminalIcons = {
   Linkedin: () => (
     <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none">
       <path
@@ -82,13 +74,30 @@ const PremiumIcons = {
       <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
     </svg>
   ),
+  Terminal: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="4 17 10 11 4 5" />
+      <line x1="12" y1="19" x2="20" y2="19" />
+    </svg>
+  ),
+  Folder: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+    </svg>
+  ),
+  File: () => (
+    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M14 2H6a2 2 0 0 1-2 2v16a2 2 0 0 1 2 2h12a2 2 0 0 1 2-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+    </svg>
+  ),
 };
 
 // -------------------- COMPONENT --------------------
 const Left = () => {
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
+  const [cardBg, setCardBg] = useState("bg-white");
 
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
@@ -97,66 +106,66 @@ const Left = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setHoverPosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
+  const handleDotClick = (color: string) => {
+    setCardBg(color);
+    setTimeout(() => {
+      setCardBg("bg-white");
+    }, 3000);
   };
 
   return (
-    <div className=" w-full flex flex-col items-center justify-between gap-2  pb-12 sticky lg:top-0 font-mono">
-      {/* Main Terminal Card */}
-      <GlassCard className="p-8 ">
+    <div className="w-full flex flex-col items-center justify-between gap-2 pb-12 sticky lg:top-0">
+      <TerminalCard className="p-8 w-full" bgColor={cardBg}>
         <div className="relative z-20">
-          {/* Hover Scan Effect */}
-          <div
-            className="absolute inset-0 overflow-hidden rounded-xl"
-            onMouseMove={handleMouseMove}
-          >
-            <div
-              className="absolute w-[1800px] h-[50px] bg-emerald-500/5 rounded-full blur-3xl"
-              style={{
-                left: hoverPosition.x,
-                top: hoverPosition.y,
-                transform: "translate(-50%, -50%)",
-              }}
+          {/* Terminal top bar */}
+          <div className="flex items-center gap-1.5 mb-6">
+            <button
+              onClick={() => handleDotClick("bg-red-50/80")}
+              className="w-3 h-3 rounded-full bg-[#ff5f56] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-red-400/50"
+              title="Switch to red theme"
             />
+            <button
+              onClick={() => handleDotClick("bg-amber-50/80")}
+              className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+              title="Switch to yellow theme"
+            />
+            <button
+              onClick={() => handleDotClick("bg-emerald-50/80")}
+              className="w-3 h-3 rounded-full bg-[#27c93f] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/50"
+              title="Switch to green theme"
+            />
+            <span className="ml-3 text-[11px] text-gray-400 tracking-wider font-mono">
+              ~/portfolio
+            </span>
+            <span className="ml-auto text-[10px] text-gray-400 font-mono">bash</span>
           </div>
 
-          {/* Terminal top bar */}
-          <div className="flex items-center gap-1.5 mb-6 opacity-70">
-            <span className="w-2 h-2 rounded-full bg-emerald-500/40" />
-            <span className="w-2 h-2 rounded-full bg-emerald-500/40" />
-            <span className="w-2 h-2 rounded-full bg-emerald-500/40" />
-            <span className="ml-2 text-[10px] tracking-widest text-emerald-500/60">
-              session --whoami
-            </span>
+          {/* Rest of the component remains the same */}
+          {/* Prompt Line */}
+          <div className="mb-8 flex items-center gap-2 text-[13px] font-mono text-gray-500">
+            <span className="text-blue-600">user@portfolio</span>
+            <span>:</span>
+            <span className="text-amber-600">~</span>
+            <span>$</span>
+            <span className="text-gray-400">./whoami</span>
           </div>
 
           {/* Profile Image */}
           <div className="relative mb-8 group">
-            <div className="relative w-40 h-40 mx-auto ">
-              {/* Outer Glow */}
-              <div className="absolute inset-0 rounded-full bg-emerald-500/20 blur-xl opacity-40 " />
-
-              {/* Image Container */}
-              <div className="relative w-full h-full rounded-full p-1 border border-emerald-500/40 group-hover:border-emerald-400 transition-colors duration-300">
-                <div className="absolute inset-0 rounded-full bg-black/40" />
+            <div className="relative w-40 h-40 mx-auto">
+              <div className="absolute inset-0 rounded-full border-2 border-gray-200 group-hover:border-blue-400 transition-colors duration-300" />
+              <div className="relative w-full h-full rounded-full p-0.5">
                 <Image
                   src={award}
                   alt="Sumit Sahni"
-                  className="w-full h-full rounded-full object-cover relative z-10"
+                  className="w-full h-full rounded-full object-cover"
                   priority
                 />
               </div>
-
-              {/* Corner brackets */}
-              <span className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-emerald-500/50" />
-              <span className="absolute -top-1 -right-1 w-3 h-3 border-t border-r border-emerald-500/50" />
-              <span className="absolute -bottom-1 -left-1 w-3 h-3 border-b border-l border-emerald-500/50" />
-              <span className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-emerald-500/50" />
+              <span className="absolute -top-1 -left-1 w-3 h-3 border-t-2 border-l-2 border-gray-300" />
+              <span className="absolute -top-1 -right-1 w-3 h-3 border-t-2 border-r-2 border-gray-300" />
+              <span className="absolute -bottom-1 -left-1 w-3 h-3 border-b-2 border-l-2 border-gray-300" />
+              <span className="absolute -bottom-1 -right-1 w-3 h-3 border-b-2 border-r-2 border-gray-300" />
             </div>
           </div>
 
@@ -165,19 +174,22 @@ const Left = () => {
             className="relative text-center mb-8 opacity-0 animate-fadeInUp"
             style={{ animationDelay: "0.2s" }}
           >
-            <p className="text-[11px] text-emerald-500/50 tracking-widest mb-1">
-              &gt; whoami
-            </p>
-            <h2 className="text-xl font-bold text-emerald-400 tracking-wide relative inline-block">
-              Sumit.A.Sahni
-              <span className="inline-block w-0.5 h-4 bg-emerald-400/70 ml-1 align-middle animate-pulse" />
-              <hr className="mt-2 border-emerald-500/20" />
+            <div className="flex items-center justify-center gap-2 text-[11px] text-gray-400 font-mono mb-2">
+              <TerminalIcons.Terminal />
+              <span>cat about.me</span>
+            </div>
+            
+            <h2 className="text-2xl font-light text-gray-800 tracking-wide relative inline-block">
+              sumit@sahni
+              <span className="inline-block w-0.5 h-5 bg-blue-500 ml-1 align-middle animate-pulse" />
             </h2>
-
-            <p className="text-xs text-gray-400 tracking-wide py-1">
-              <span className="text-emerald-500/60">role:</span> Engineer{" "}
-              <span className="text-emerald-500/60">@</span> Microsoft
-            </p>
+            
+            <div className="mt-3 flex items-center justify-center gap-2 text-sm font-mono text-gray-500">
+              <span className="text-blue-600">role:</span>
+              <span className="text-gray-700">Engineer</span>
+              <span className="text-blue-600">@</span>
+              <span className="text-gray-700">Microsoft</span>
+            </div>
           </div>
 
           {/* Resume Button */}
@@ -185,9 +197,10 @@ const Left = () => {
             className="mb-10 opacity-0 animate-fadeInUp"
             style={{ animationDelay: "0.4s" }}
           >
-            <button className="relative w-full px-6 py-3 bg-black text-emerald-400 border border-emerald-500/40 rounded-md text-sm font-medium tracking-wide flex items-center justify-center gap-2 hover:bg-emerald-500 hover:text-black transition-all duration-300">
-              <PremiumIcons.Download />
-              <span>./download-resume.sh</span>
+            <button className="relative w-full px-6 py-3.5 bg-gray-900 text-white border border-gray-200 rounded-lg text-sm font-mono flex items-center justify-center gap-3 hover:bg-gray-800 hover:border-blue-400 transition-all duration-300 group shadow-sm">
+              <TerminalIcons.Download />
+              <span className="tracking-wide">wget -O resume.pdf</span>
+              <span className="text-gray-400 text-xs group-hover:text-blue-400">↓</span>
             </button>
           </div>
 
@@ -202,20 +215,23 @@ const Left = () => {
           >
             <div className="space-y-8">
               {/* Social Icons */}
-              <GlassCard className="p-4 opacity-0 animate-fadeInUp">
-                <div className="flex items-center justify-center gap-3">
+              <div className="p-4 border border-gray-200 rounded-lg bg-gray-50/50">
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-[10px] text-gray-400 tracking-wider font-mono">$ social --connect</span>
+                </div>
+                <div className="flex items-center justify-center gap-3 mt-3">
                   {[
                     {
                       href: "https://www.linkedin.com/in/sumit-sahni-852756204/",
-                      icon: <PremiumIcons.Linkedin />,
+                      icon: <TerminalIcons.Linkedin />,
                     },
                     {
                       href: "mailto:sumit.123sahni@gmail.com?subject=Hello",
-                      icon: <PremiumIcons.Email />,
+                      icon: <TerminalIcons.Email />,
                     },
                     {
                       href: "https://github.com/",
-                      icon: <PremiumIcons.Github />,
+                      icon: <TerminalIcons.Github />,
                     },
                   ].map(({ href, icon }, i) => (
                     <a
@@ -223,47 +239,45 @@ const Left = () => {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-3 rounded-md border border-emerald-500/20 text-emerald-500/70 hover:text-emerald-300 hover:border-emerald-400/60 transition-all duration-300"
+                      className="p-3 rounded-lg border border-gray-200 text-gray-500 hover:text-blue-600 hover:border-blue-400 transition-all duration-300 bg-white"
                     >
                       {icon}
                     </a>
                   ))}
                 </div>
-              </GlassCard>
+              </div>
 
-              {/* Certifications - Terminal List */}
+              {/* Certifications */}
               <div className="space-y-4">
-                <h3
-                  className="text-[11px] font-semibold text-emerald-500/60 uppercase tracking-widest text-center opacity-0 animate-fadeInUp"
-                  style={{ animationDelay: "0.8s" }}
-                >
-                  &gt; ls ./certifications
-                </h3>
+                <div className="flex items-center justify-center gap-2 text-[11px] text-gray-400 font-mono">
+                  <TerminalIcons.Folder />
+                  <span className="tracking-wider">ls -la ./certs/</span>
+                </div>
 
                 <div className="space-y-2">
                   {[
                     {
                       text: "CompTIA Security+",
                       link: "https://www.udemy.com/certificate/UC-7457ca37-4baa-437f-b078-a74931667ee7/",
-                      tag: "sec",
+                      tag: "SEC",
                       delay: 0.9,
                     },
                     {
                       text: "CCNA 200-301",
                       link: "https://www.udemy.com/certificate/UC-2c9eb698-7086-4d9f-9093-ec7435fb9680/",
-                      tag: "net",
+                      tag: "NET",
                       delay: 1.0,
                     },
                     {
                       text: "Web Development Bootcamp",
                       link: "https://www.udemy.com/certificate/UC-f73ada88-8d74-45bd-9ccf-a717372163d9/",
-                      tag: "dev",
+                      tag: "DEV",
                       delay: 1.1,
                     },
                     {
                       text: "College Project",
                       link: "https://drive.google.com/file/d/1fYxtSDvl8sW5ePKUyCj22ESkiMMtSuyD/view",
-                      tag: "doc",
+                      tag: "DOC",
                       delay: 1.2,
                     },
                   ].map((cert, i) => (
@@ -272,17 +286,18 @@ const Left = () => {
                       href={cert.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-md bg-black/30 border border-emerald-500/10 hover:border-emerald-400/50 transition-all duration-300 group cursor-pointer opacity-0 animate-fadeInUp"
+                      className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 border border-gray-200 hover:border-blue-400 hover:bg-gray-100 transition-all duration-300 group cursor-pointer opacity-0 animate-fadeInUp"
                       style={{ animationDelay: `${cert.delay}s` }}
                     >
-                      <span className="text-[10px] font-bold text-emerald-500/60 border border-emerald-500/30 rounded px-1.5 py-0.5 tracking-wider">
+                      <TerminalIcons.File />
+                      <span className="text-[10px] font-mono text-blue-600 border border-gray-300 rounded px-2 py-0.5 tracking-wider">
                         {cert.tag}
                       </span>
-                      <span className="text-sm text-gray-300 group-hover:text-emerald-300 transition-colors">
+                      <span className="text-sm text-gray-600 group-hover:text-gray-900 transition-colors">
                         {cert.text}
                       </span>
-                      <span className="ml-auto text-emerald-500/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        &gt;
+                      <span className="ml-auto text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        →
                       </span>
                     </a>
                   ))}
@@ -291,36 +306,32 @@ const Left = () => {
             </div>
           </div>
         </div>
-      </GlassCard>
+      </TerminalCard>
 
-      {/* Mobile Toggle Button */}
+      {/* Mobile Toggle */}
       {isMobile && (
         <button
           onClick={() => setOpen(!open)}
           className="mt-4 w-full max-w-xs mx-auto active:scale-95 transition-transform"
         >
-          <GlassCard className="py-4 px-6">
-            <div className="flex items-center justify-center gap-3 text-emerald-400/80">
-              <span className="text-sm font-medium tracking-wide">
-                {open ? "collapse --all" : "expand --all"}
+          <TerminalCard className="py-4 px-6">
+            <div className="flex items-center justify-center gap-3 text-gray-500">
+              <TerminalIcons.Terminal />
+              <span className="text-sm font-mono tracking-wide">
+                {open ? "exit" : "ls -la"}
               </span>
               <div
                 className={`transition-transform duration-300 ${
                   open ? "rotate-180" : "rotate-0"
                 }`}
               >
-                <PremiumIcons.Chevron />
+                <TerminalIcons.Chevron />
               </div>
             </div>
-          </GlassCard>
+          </TerminalCard>
         </button>
       )}
 
-      {/* Floating Decorative Elements */}
-      <div className="absolute top-0 left-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 right-0 w-40 h-40 bg-emerald-500/5 rounded-full blur-3xl -z-10" />
-
-      {/* Animations */}
       <style jsx global>{`
         @keyframes fadeInUp {
           from {
