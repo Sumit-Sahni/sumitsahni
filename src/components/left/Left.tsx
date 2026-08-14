@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import award from "../../../assets/me.png";
@@ -229,7 +228,7 @@ const Left = () => {
                       icon: <TerminalIcons.Email />,
                     },
                     {
-                      href: "https://github.com/",
+                      href: "https://github.com/Sumit-Sahni",
                       icon: <TerminalIcons.Github />,
                     },
                   ].map(({ href, icon }, i) => (
