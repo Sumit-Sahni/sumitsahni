@@ -255,6 +255,12 @@ const Left = () => {
                 <div className="space-y-2">
                   {[
                     {
+                      text: "Azure AI Fundamentals",
+                      link: "https://learn.microsoft.com/en-us/users/sumitsahni-8408/credentials/a2ad2be6adb2cde8",
+                      tag: "SEC",
+                      delay: 0.9,
+                    },
+                    {
                       text: "CompTIA Security+",
                       link: "https://www.udemy.com/certificate/UC-7457ca37-4baa-437f-b078-a74931667ee7/",
                       tag: "SEC",
