@@ -26,7 +26,7 @@ const Footer = () => {
             <p>2021 – 2026 personal portfolio</p>
             <div className="flex justify-center flex-wrap">
               <Link href="#" className="hover:underline">
-                Developed by <span className=" caveat text-md"> Sumit Sahni — </span>Pune
+                Developed by <span className=" text-md"> Sumit Sahni — </span>Pune
                 
               </Link>
             </div>

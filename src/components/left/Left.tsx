@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
-import award from "../../../assets/me.png";
+import award from "../../../assets/me_microsoft.png";
 
 // -------------------- CARD --------------------
 const TerminalCard = ({
