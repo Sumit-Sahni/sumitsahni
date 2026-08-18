@@ -9,12 +9,12 @@ import ScrollProgressBar from "@/components/scrollbar/ScrollProgressBar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-fill sm:bg-cover bg-center bg-no-repeat to-white/5 from-white/20 via-white/10 bg-gradient-to-b">
+    <div className="min-h-screen bg-fill sm:bg-cover bg-center bg-no-repeat to-white/5 from-white/20 via-white/10 bg-gradient-to-b flex flex-col">
       {/* Header */}
       <div
-        className="top-0 left-0 right-0 w-full px-4 py-4
+        className="sticky top-0 left-0 right-0 w-full px-4 py-4
                       flex justify-between items-center
-                      text-black text-xs"
+                      text-black text-xs bg-white/80 backdrop-blur-sm z-10"
       >
         {/* Left */}
         <h1 className="text-xs p-1 px-2 rounded-sm md:text-md font-bold text-black">
@@ -36,14 +36,18 @@ export default function Home() {
 
       {/* Main Content */}
       <div
-        className="font-sans min-h-screen 
-                      px-4 md:p-4 lg:px-4 xl:px-16 2xl:px-48
-                      flex flex-col lg:flex-row bg-white"
+        className="font-sans flex-1
+                      px-4 md:px-6 lg:px-8 xl:px-12 2xl:px-24
+                      flex flex-col lg:flex-row gap-4 lg:gap-6
+                      bg-white w-full max-w-[1600px] mx-auto"
       >
-        <div className=" mx-auto w-full sm:w-1/3 xl:w-1/3  ">
+        {/* Left Column - Fixed width on large screens, full width on mobile */}
+        <div className="w-full lg:w-[280px] xl:w-[320px] 2xl:w-[380px] flex-shrink-0">
           <Left />
         </div>
-        <div className="lg:w-full flex flex-col items-end md:px-4">
+        
+        {/* Right Column - Takes remaining space */}
+        <div className="flex-1 min-w-0">
           <Right />
         </div>
       </div>
