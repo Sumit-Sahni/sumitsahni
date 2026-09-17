@@ -4,8 +4,8 @@ export const experiences = [
     company: "Microsoft",
     duration: "January 2026 - Present",
     details: [
-      "Provide technical support for Windows operating systems, diagnosing and resolving software and system-related issues.",
-      "Troubleshoot Active Directory Services, including user account management, group memberships, password resets, and authentication issues.",
+      "Work with Windows operating systems, diagnosing and resolving software and system-related issues.",
+      "High-level Troubleshoot Active Directory Services, including user account management, group memberships, password resets, and authentication issues.",
       "Investigate and resolve Windows login, domain join, Group Policy, DNS, and network connectivity problems.",
       "Support enterprise customers by analyzing logs, identifying root causes, and implementing effective solutions.",
       "Assist with Windows Server administration and Active Directory replication, DNS, and domain controller health checks.",
@@ -35,15 +35,5 @@ export const experiences = [
     ],
     active: false,
   },
-  {
-    title: "Frontend Developer [Intern]",
-    company: "Predrag System",
-    duration: "4 months",
-    details: [
-      "Designed and implemented a fully responsive UI for Evogym, enhancing user experience across all devices by utilizing modern frontend technologies.",
-      "Collaborated closely with the design team to transform wireframes and prototypes into a sleek, intuitive user interface, resulting in a 25% increase in user engagement.",
-      "Integrated dynamic features using React, ensuring seamless interaction for users and providing a solid foundation for future feature expansions.",
-    ],
-    active: false,
-  },
+  
 ];
