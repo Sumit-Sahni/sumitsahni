@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Videos from "@/components/video/Video";
-import Projects from "@/components/projects/Projects";
+import Project1 from "@/components/projects/ProjectKubernetesMini";
+import Project2 from "@/components/projects/Projectdevopscontrolroom";
 import { experiences } from "@/data/exp";
 
 /* ---------------------------------- */
@@ -55,13 +56,25 @@ const tabContentVariants: Variants = {
 // Terminal Icons
 const TerminalIcons = {
   Terminal: () => (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <polyline points="4 17 10 11 4 5" />
       <line x1="12" y1="19" x2="20" y2="19" />
     </svg>
   ),
   Folder: () => (
-    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <svg
+      className="w-4 h-4"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
       <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
     </svg>
   ),
@@ -75,12 +88,12 @@ const Right = () => {
   const [activeTab, setActiveTab] = useState<
     "experience" | "videos" | "projects"
   >("experience");
-  
+
   const [bgColor, setBgColor] = useState("bg-white");
   const [terminalCommand, setTerminalCommand] = useState("~/summary");
 
   const linuxCommands = [
-    "~/cat",         
+    "~/cat",
     "~/cd",
     "~/ls",
     "~/pwd",
@@ -99,7 +112,7 @@ const Right = () => {
     "~/history",
     "~/clear",
     "~/exit",
-    "~/whoami"
+    "~/whoami",
   ];
 
   useEffect(() => {
@@ -108,14 +121,14 @@ const Right = () => {
 
     const startRotation = () => {
       let index = 0;
-      
+
       // Initial change after 3 seconds
       timeout = setTimeout(() => {
         interval = setInterval(() => {
           index = (index + 1) % linuxCommands.length;
           setTerminalCommand(linuxCommands[index]);
         }, 1000); // Change every 2 seconds
-      }, 0.000); // Start after 0 seconds
+      }, 0.0); // Start after 0 seconds
     };
 
     startRotation();
@@ -182,17 +195,16 @@ const Right = () => {
       >
         {[
           { id: "experience", label: "~/experience" },
-          { id: "videos", label: "~/videos" },
           { id: "projects", label: "~/projects" },
+
+          { id: "videos", label: "~/videos" },
         ].map((tab) => (
           <motion.button
             key={tab.id}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.97 }}
             onClick={() =>
-              setActiveTab(
-                tab.id as "experience" | "videos" | "projects"
-              )
+              setActiveTab(tab.id as "experience" | "videos" | "projects")
             }
             className={`
               relative
@@ -273,9 +285,7 @@ const Right = () => {
                       border-2 border-white
                       z-10
                       ${
-                        exp.active
-                          ? "bg-blue-500 animate-pulse"
-                          : "bg-gray-300"
+                        exp.active ? "bg-blue-500 animate-pulse" : "bg-gray-300"
                       }
                     `}
                   />
@@ -284,7 +294,9 @@ const Right = () => {
                   <div className="ml-10 sm:ml-16 flex-1 border border-gray-200 hover:border-blue-400 transition-colors duration-300 rounded-lg p-4 bg-gray-50/50">
                     <div className="mb-3">
                       <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <span className="text-[10px] text-gray-400 font-mono">$</span>
+                        <span className="text-[10px] text-gray-400 font-mono">
+                          $
+                        </span>
                         <h3 className="text-base text-gray-800 font-mono">
                           {exp.title}
                         </h3>
@@ -350,7 +362,8 @@ const Right = () => {
               <TerminalIcons.Folder />
               <span>ls -la ./projects/</span>
             </div>
-            <Projects />
+            <Project1 />
+            <Project2 />
           </motion.div>
         )}
       </AnimatePresence>
@@ -359,3 +372,4 @@ const Right = () => {
 };
 
 export default Right;
+
