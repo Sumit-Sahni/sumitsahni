@@ -17,9 +17,16 @@ export default function Home() {
                       text-black text-xs bg-white/80 backdrop-blur-sm z-10"
       >
         {/* Left */}
-        <h1 className="text-xs p-1 px-2 rounded-sm md:text-md font-bold text-black">
-          portfolio
-        </h1>
+        <div className="flex flex-row justify-between items-center gap-2">
+          <h1 className="text-xs p-1 px-2 rounded-sm md:text-md font-bold text-black">
+            portfolio
+          </h1>
+          <h1>
+            <a href="https://github.com/Sumit-Sahni?tab=repositories" target="_blank" rel="noopener noreferrer" className="text-xs p-1 px-2 rounded-sm md:text-md font-bold text-blue-600 hover:underline">
+              GitHub
+            </a>
+          </h1>
+        </div>
 
         {/* Right */}
         <div className="flex flex-row justify-between items-center gap-1">
@@ -45,7 +52,7 @@ export default function Home() {
         <div className="w-full lg:w-[280px] xl:w-[320px] 2xl:w-[380px] flex-shrink-0">
           <Left />
         </div>
-        
+
         {/* Right Column - Takes remaining space */}
         <div className="flex-1 min-w-0">
           <Right />

@@ -120,17 +120,17 @@ const Left = () => {
           <div className="flex items-center gap-1.5 mb-6">
             <button
               onClick={() => handleDotClick("bg-red-50/80")}
-              className="w-3 h-3 rounded-full bg-[#ff5f56] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-red-400/50"
+              className="cursor-pointer  w-3 h-3 rounded-full bg-[#ff5f56] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-red-400/50"
               title="Switch to red theme"
             />
             <button
               onClick={() => handleDotClick("bg-amber-50/80")}
-              className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
+              className="cursor-pointer  w-3 h-3 rounded-full bg-[#ffbd2e] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-amber-400/50"
               title="Switch to yellow theme"
             />
             <button
               onClick={() => handleDotClick("bg-emerald-50/80")}
-              className="w-3 h-3 rounded-full bg-[#27c93f] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/50"
+              className="cursor-pointer  w-3 h-3 rounded-full bg-[#27c93f] hover:scale-110 transition-transform duration-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/50"
               title="Switch to green theme"
             />
             <span className="ml-3 text-[11px] text-gray-400 tracking-wider font-mono">
@@ -254,6 +254,12 @@ const Left = () => {
 
                 <div className="space-y-2">
                   {[
+                    {
+                      text: "Microsoft Global Hackathon 2026",
+                      link: "https://www.credly.com/badges/5dfa1d72-4c24-47d7-8a85-ec1755754ac0/email",
+                      tag: "SEC",
+                      delay: 0.9,
+                    },
                     {
                       text: "Azure AI Fundamentals",
                       link: "https://learn.microsoft.com/en-us/users/sumitsahni-8408/credentials/a2ad2be6adb2cde8",

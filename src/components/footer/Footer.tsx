@@ -23,10 +23,10 @@ const Footer = () => {
 
           {/* CENTER: Legal */}
           <div className="text-center">
-            <p>2021 – 2026 personal portfolio</p>
+            <p>2021 – 2027 personal portfolio</p>
             <div className="flex justify-center flex-wrap">
               <Link href="#" className="hover:underline">
-                Developed by <span className=" text-md"> Sumit Sahni — </span>Pune
+                Developed by <span className=" text-md animate-spin"> Sumit Sahni — </span>Bengaluru<span className="animate-spin">📍</span>
                 
               </Link>
             </div>
