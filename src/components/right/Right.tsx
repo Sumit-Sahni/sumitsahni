@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import Videos from "@/components/video/Video";
+import Skills from "@/components/skills/Skills";
 import Project1 from "@/components/projects/ProjectKubernetesMini";
 import Project2 from "@/components/projects/Projectdevopscontrolroom";
 import Project3 from "@/components/projects/ProjectNoteContainer";
@@ -87,7 +88,7 @@ const TerminalIcons = {
 
 const Right = () => {
   const [activeTab, setActiveTab] = useState<
-    "experience" | "videos" | "projects"
+    "experience" | "videos" | "projects" | "skills"
   >("experience");
 
   const [bgColor, setBgColor] = useState("bg-white");
@@ -197,15 +198,15 @@ const Right = () => {
         {[
           { id: "experience", label: "~/experience" },
           { id: "projects", label: "~/projects" },
-
           { id: "videos", label: "~/videos" },
+          { id: "skills", label: "~/skills" },
         ].map((tab) => (
           <motion.button
             key={tab.id}
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.97 }}
             onClick={() =>
-              setActiveTab(tab.id as "experience" | "videos" | "projects")
+              setActiveTab(tab.id as "experience" | "videos" | "projects" | "skills")
             }
             className={`
               relative
@@ -359,6 +360,8 @@ const Right = () => {
             animate="visible"
             exit="exit"
           >
+
+          
             <div className="flex items-center gap-2 text-[11px] text-gray-400 font-mono mb-5">
               <TerminalIcons.Folder />
               <span>ls -la ./projects/</span>
@@ -368,6 +371,24 @@ const Right = () => {
             <Project2 />
           </motion.div>
         )}
+
+
+        {activeTab === "skills" && (
+          <motion.div
+            key="skills"
+            variants={tabContentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <div className="flex items-center gap-2 text-[11px] text-gray-400 font-mono mb-5">
+              <span>▶</span>
+              <span>ls -la ./skills/</span>
+            </div>
+            <Skills/>
+          </motion.div>
+        )}
+
       </AnimatePresence>
     </motion.div>
   );
